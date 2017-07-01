@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/ownCss.css" rel="stylesheet" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <style>
@@ -14,21 +14,29 @@
 </head>
 
 <body>
+ 
     <div class="navbar navbar-inverse navbar-fixed-top">
        <div class="container-fluid">
            <div class="navbar-header">
-               <a class="navbar-brand" href="#" >FoodOrder</a>
+               <a  class="navbar-brand" href="#" >
+                  FoodOrder
+               </a>
            </div>
        </div>
     </div>
    
     <div class="container-fluid">
         <div class="row content">
-            <div class="col-sm-2 sidenav" >
-                <h2>Kategorie</h2>
+            <div class="col-sm-2 sidenav well well-lg" >
+                <a href="#"><img src="~/Images/logo.png" width="150" height="130" /></a>
+                <h1>Kategorie</h1>
             </div>
+
             <div class="col-sm-9">
                 @RenderBody()
+            </div>
+
+            <div class="col-sm-1 sidenav well-lg">
             </div>
         </div>
     </div>
