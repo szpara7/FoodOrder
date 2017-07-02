@@ -136,10 +136,19 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\Category.cs" />
+    <Compile Include="DAL\Customer.cs" />
+    <Compile Include="DAL\DbCtx.cs" />
+    <Compile Include="DAL\Employee.cs" />
+    <Compile Include="DAL\Order.cs" />
+    <Compile Include="DAL\OrderLine.cs" />
+    <Compile Include="DAL\Price.cs" />
+    <Compile Include="DAL\Product.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
