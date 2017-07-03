@@ -13,7 +13,9 @@ namespace FoodOrder.Controllers
         public ActionResult Index()
         {
             return View();
+
         }
+
 
         [ChildActionOnly]
         public ActionResult CategoriesList()
