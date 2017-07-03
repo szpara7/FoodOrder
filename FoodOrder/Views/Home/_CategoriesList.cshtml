@@ -1,0 +1,10 @@
+﻿@model List<FoodOrder.DAL.Category>
+
+
+<div class="btn-group-vertical btn-block">
+    @foreach (var i in Model)
+    {
+        <button class="btn btn-default btn-block">@i.Name</button>
+    }
+</div>
+

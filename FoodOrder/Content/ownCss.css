@@ -7,6 +7,7 @@
 
 .sidenav {
     background-color:#E0E0E0;
+    border-color:#606060;
     height: 100%;
 }
 
@@ -15,4 +16,9 @@
     border-bottom-color:#ffff55;
     height: 55px;
     color:red;
+}
+
+.categoriesButton{
+    height:60px;
+    width:200px;
 }

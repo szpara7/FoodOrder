@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodOrder.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,6 +15,15 @@ namespace FoodOrder.Controllers
             return View();
         }
 
-
+        [ChildActionOnly]
+        public ActionResult CategoriesList()
+        {
+            using (var db = new DbCtx())
+            {
+                var categories = db.Categories.ToList();
+                return PartialView("_CategoriesList", categories);
+            };
+            
+        }
     }
 }
