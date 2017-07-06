@@ -1,4 +1,5 @@
 ﻿using FoodOrder.DAL;
+using FoodOrder.ViewModel.Home;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace FoodOrder.ViewModel
 {
     public class HomeIndexViewModel
     {
-        public IEnumerable<Product> TopRated { get; set; }
+        public IEnumerable<TopRatedViewModel> TopRated { get; set; }
         public IEnumerable<MostOrdersViewModel> MostOrders { get; set; }
     }
 }

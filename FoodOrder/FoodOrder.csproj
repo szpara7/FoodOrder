@@ -155,8 +155,9 @@
     <Compile Include="Infrastructure\UrlHelpers.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\HomeIndexViewModel.cs" />
-    <Compile Include="ViewModel\MostOrdersViewModel.cs" />
+    <Compile Include="ViewModel\Home\HomeIndexViewModel.cs" />
+    <Compile Include="ViewModel\Home\MostOrdersViewModel.cs" />
+    <Compile Include="ViewModel\Home\TopRatedViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

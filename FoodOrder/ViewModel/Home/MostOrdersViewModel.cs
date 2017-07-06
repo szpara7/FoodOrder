@@ -9,9 +9,7 @@ namespace FoodOrder.ViewModel
     {
         public int ProductID { get; set; }
         public int Count { get; set; }
-
         public string ProductName { get; set; }
-
-
+        public string CategoryName { get; set; }
     }
 }

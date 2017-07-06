@@ -1,5 +1,6 @@
 ﻿using FoodOrder.DAL;
 using FoodOrder.ViewModel;
+using FoodOrder.ViewModel.Home;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,15 @@ namespace FoodOrder.Controllers
             var products = new HomeIndexViewModel();
             using (var db = new DbCtx())
             {
-                products.TopRated = db.Products.OrderByDescending(o => o.Rate).Take(3).ToList();
+                products.TopRated = db.Products.OrderByDescending(o => o.Rate)
+                    .Select(x => new TopRatedViewModel()
+                    {
+                        ProductName = x.ProductName,
+                        ImageName = x.ImageName,
+                        Rate = x.Rate,
+                        CategoryName = x.Category.CategoryName
+                    })
+                    .Take(3).ToList();
 
                 products.MostOrders = db.OrderLines
                     .Join(db.Products, od => od.Product.ProductID, p => p.ProductID,
@@ -26,12 +35,12 @@ namespace FoodOrder.Controllers
                         Product = p,
                         OrderLine = od
                     })
-                    .GroupBy(g => new {g.Product.ProductID,g.Product.Name })
+                    .GroupBy(g => new {g.Product.ProductID,g.Product.ProductName })
                     .Select(x => new MostOrdersViewModel()
                     {
                         ProductID = x.Key.ProductID,
                         Count = x.Count(),
-                        ProductName = x.Key.Name
+                        ProductName = x.Key.ProductName
                     })
                     .OrderByDescending(x => x.Count)
                     .ToList()

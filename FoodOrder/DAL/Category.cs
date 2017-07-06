@@ -11,7 +11,7 @@ namespace FoodOrder.DAL
         public int CategoryID { get; set; }
 
         [Required,MaxLength(15)]
-        public string Name { get; set; }
+        public string CategoryName { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
     }

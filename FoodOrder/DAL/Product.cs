@@ -12,7 +12,7 @@ namespace FoodOrder.DAL
         public int ProductID { get; set; }
 
         [Required,MaxLength(15)]
-        public string Name { get; set; }
+        public string ProductName { get; set; }
 
         [Required,MaxLength(60)]
         public string Description { get; set; }
