@@ -11,8 +11,8 @@
 @foreach (var i in Model.TopRated)
 {
     <div class="col-lg-4 well">
-        <a class="col-lg-pull-1"><img src="@Url.ProductImagePath("PIZZA","hawajska.jpg")" height="185" width="275" align="left" /></a>
-        <h2 align="center">@i.Name</h2>
+        <a class="col-lg-pull-1"><img src="@Url.ProductImagePath(@i.CategoryName,@i.ImageName)" height="185" width="275" align="left" /></a>
+        <h2 align="center">@i.ProductName</h2>
         <h3>Rate: @i.Rate</h3>
         <button class="btn btn-danger">Show details</button>
     </div>
@@ -22,7 +22,7 @@
 @foreach (var i in Model.MostOrders)
 {
     <div class="col-lg-4 well">
-        <a class="col-lg-pull-1"><img src="~/Images/Category/PIZZA/hawajska.jpg" align="left" /></a>
+        <a class="col-lg-pull-1"><img src="@Url.ProductImagePath(@i.CategoryName,@i.ImageName)" align="left" /></a>
         <h2>@i.ProductName</h2>
         <button class="btn btn-danger">Show details</button>
     </div>

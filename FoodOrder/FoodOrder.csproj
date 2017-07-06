@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\FoodOrderDB_log.ldf" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -117,6 +118,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="App_Data\FoodOrderDB" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\Category\PIZZA\desperado.jpg" />
     <Content Include="Images\Category\PIZZA\hawajska.jpg" />
@@ -172,7 +174,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>

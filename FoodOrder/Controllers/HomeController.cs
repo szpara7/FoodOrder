@@ -35,12 +35,14 @@ namespace FoodOrder.Controllers
                         Product = p,
                         OrderLine = od
                     })
-                    .GroupBy(g => new {g.Product.ProductID,g.Product.ProductName })
+                    .GroupBy(g => new {g.Product.ProductID,g.Product.ProductName,g.Product.Category.CategoryName,g.Product.ImageName })
                     .Select(x => new MostOrdersViewModel()
                     {
                         ProductID = x.Key.ProductID,
                         Count = x.Count(),
-                        ProductName = x.Key.ProductName
+                        ProductName = x.Key.ProductName,
+                        CategoryName = x.Key.CategoryName,
+                        ImageName = x.Key.ImageName
                     })
                     .OrderByDescending(x => x.Count)
                     .ToList()
