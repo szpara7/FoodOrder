@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace FoodOrder.Controllers
 {
-    public class ProductDetailsController : Controller
+    public class ProductController : Controller
     {
         // GET: ProductDetails
         public ActionResult Index()
