@@ -15,7 +15,7 @@ namespace FoodOrder
 
             routes.MapRoute(
               name: "ProductsList",
-              url: "{Categories}/{categoryName}",
+              url: "{Categories}/{categoryName}.html",
               defaults: new { controller = "Product", action = "ProductsList" }
               );
 

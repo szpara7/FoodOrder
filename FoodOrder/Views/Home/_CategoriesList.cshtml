@@ -4,7 +4,9 @@
 <div class="btn-group-vertical btn-block">
     @foreach (var i in Model)
     {
-        <button class="btn btn-default btn-block">@i.CategoryName</button>
+        <a href="@Url.Action("ProductsList","Product", new { categoryName = i.CategoryName})">
+            <input type="submit" class="btn btn-default btn-block" value="@i.CategoryName" />
+        </a>
     }
 </div>
 

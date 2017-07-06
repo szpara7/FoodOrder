@@ -23,7 +23,8 @@ namespace FoodOrder.Controllers
                         Product = t,
                         Price = p
                     })
-                    .Where(t => t.Product.Category.CategoryName == categoryName)
+                    .Where(t => t.Product.Category.CategoryName == categoryName
+                    && t.Price.EndDate == null)
                     .Select(z => new ProductsListViewModel()
                     {
                         ProductId = z.Product.ProductID,
@@ -41,3 +42,5 @@ namespace FoodOrder.Controllers
         }
     }
 }
+
+//Todo: Cena w produkcie obowiązkowa
