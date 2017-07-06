@@ -1,7 +1,30 @@
-﻿
+﻿@model FoodOrder.ViewModel.HomeIndexViewModel
+@using FoodOrder.Infrastructure;
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="topRatedBlock">
+    <h2>Top Rated</h2>
+</div>
+
+@foreach (var i in Model.TopRated)
+{
+    <div class="col-lg-4 well">
+        <a class="col-lg-pull-1"><img src="@Url.ProductImagePath("PIZZA","hawajska.jpg")" height="185" width="275" align="left" /></a>
+        <h2 align="center">@i.Name</h2>
+        <h3>Rate: @i.Rate</h3>
+        <button class="btn btn-danger">Show details</button>
+    </div>
+}
+<br />
+<h2>Most Orders</h2>
+@foreach (var i in Model.MostOrders)
+{
+    <div class="col-lg-4 well">
+        <a class="col-lg-pull-1"><img src="~/Images/Category/PIZZA/hawajska.jpg" align="left" /></a>
+        <h2>@i.ProductName</h2>
+        <button class="btn btn-danger">Show details</button>
+    </div>
+}
 

@@ -22,3 +22,9 @@
     height:60px;
     width:200px;
 }
+
+.topRatedBlock{
+    height:auto;
+    width:200px;
+    background-color:aliceblue;
+}
