@@ -20,6 +20,8 @@ namespace FoodOrder.DAL
         [Range(0,5),DefaultValue(0)]
         public int Rate { get; set; }
 
+        public string ImageName { get; set; }
+
         public virtual Category Category { get; set; }
 
         public virtual ICollection<OrderLine> OrderLines { get; set; }
