@@ -12,7 +12,7 @@ namespace FoodOrder.Controllers
     public class ProductController : Controller
     {
         // GET: ProductDetails
-        public ActionResult ProductsList(int categoryId = 1)
+        public ActionResult ProductsList(string categoryName)
         {
             using (var db = new DbCtx())
             {
@@ -23,7 +23,7 @@ namespace FoodOrder.Controllers
                         Product = t,
                         Price = p
                     })
-                    .Where(t => t.Product.Category.CategoryID == categoryId)
+                    .Where(t => t.Product.Category.CategoryName == categoryName)
                     .Select(z => new ProductsListViewModel()
                     {
                         ProductId = z.Product.ProductID,
