@@ -11,8 +11,7 @@ namespace FoodOrder.Infrastructure
         public static string ProductImagePath(this UrlHelper helper, string categoryName,string productName)
         {
             string path = helper.Content("~/Images/"+"Category/" + categoryName + "/" + productName);
-            return path;
-            
+            return path;          
         }
     }
 }

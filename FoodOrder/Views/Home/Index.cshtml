@@ -22,7 +22,7 @@
 @foreach (var i in Model.MostOrders)
 {
     <div class="col-lg-4 well">
-        <a class="col-lg-pull-1"><img src="@Url.ProductImagePath(@i.CategoryName,@i.ImageName)" align="left" /></a>
+        <a class="col-lg-pull-1"><img src="@Url.ProductImagePath(@i.CategoryName,@i.ImageName)"height="185" width="275" align="left" /></a>
         <h2>@i.ProductName</h2>
         <button class="btn btn-danger">Show details</button>
     </div>
