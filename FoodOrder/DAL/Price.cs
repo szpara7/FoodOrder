@@ -15,7 +15,7 @@ namespace FoodOrder.DAL
 
         [Required]
         public DateTime InitialDate { get; set; }
-
+        
         public DateTime EndDate { get; set; }
 
         public virtual Product Product{ get; set; }
