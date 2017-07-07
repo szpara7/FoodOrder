@@ -28,3 +28,9 @@
     width:200px;
     background-color:aliceblue;
 }
+
+.boxPrice{
+    -webkit-box-shadow: -1px -4px 48px 5px rgba(108,108,171,0.78);
+-moz-box-shadow: -1px -4px 48px 5px rgba(108,108,171,0.78);
+box-shadow: -1px -4px 48px 5px rgba(108,108,171,0.78);
+}

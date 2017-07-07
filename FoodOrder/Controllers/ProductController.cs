@@ -31,7 +31,8 @@ namespace FoodOrder.Controllers
                         ImageName = z.Product.ImageName,
                         Description = z.Product.Description,
                         ProductName = z.Product.ProductName,
-                        Price = z.Price.Value                  
+                        Price = z.Price.Value,
+                        CategoryName = z.Product.Category.CategoryName               
                     }).
                     ToList();
 
@@ -44,3 +45,4 @@ namespace FoodOrder.Controllers
 }
 
 //Todo: Cena w produkcie obowiązkowa
+
