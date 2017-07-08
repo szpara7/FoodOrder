@@ -19,13 +19,19 @@ namespace FoodOrder
               defaults: new { controller = "Product", action = "ProductsList" }
               );
 
+
+            routes.MapRoute(
+               name: "ProductDetails",
+                url: "product-{productId}",
+                defaults: new { controller = "Product", action = "ProductDetails" }
+               );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-          
+                   
         }
     }
 }

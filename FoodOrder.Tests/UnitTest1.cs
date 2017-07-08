@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FoodOrder.Infrastructure;
 
 namespace FoodOrder.Tests
 {
@@ -7,8 +8,10 @@ namespace FoodOrder.Tests
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+       public void UnitMethod()
         {
+            
         }
+        
     }
 }

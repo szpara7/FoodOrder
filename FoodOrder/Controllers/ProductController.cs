@@ -41,6 +41,36 @@ namespace FoodOrder.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
           
         }
+
+        public ActionResult ProductDetails(int productId)
+        {
+            //todo: change layout
+            using (var db = new DbCtx())
+            {
+                var result = db.Products
+                    .Join(db.Prices, p => p.ProductID, t => t.Product.ProductID,
+                    (p, t) => new
+                    {
+                        Product = p,
+                        Price = t
+                    })
+                    .Where(p => p.Product.ProductID == productId
+                    && p.Price.EndDate == null)
+                    .Select(x => new ProductDetailViewModel()
+                    {
+                        ProductName = x.Product.ProductName,
+                        CategoryName = x.Product.Category.CategoryName,
+                        Description = x.Product.Description,
+                        Rate = x.Product.Rate,
+                        Price = x.Price.Value
+                    })
+                    .FirstOrDefault();
+
+                return View(result);
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                
+        }
     }
 }
 

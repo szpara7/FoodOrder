@@ -161,6 +161,7 @@
     <Compile Include="ViewModel\Home\HomeIndexViewModel.cs" />
     <Compile Include="ViewModel\Home\MostOrdersViewModel.cs" />
     <Compile Include="ViewModel\Home\TopRatedViewModel.cs" />
+    <Compile Include="ViewModel\Product\ProductDetailViewModel.cs" />
     <Compile Include="ViewModel\Product\ProductsListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +170,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Home\_CategoriesList.cshtml" />
     <Content Include="Views\Product\ProductsList.cshtml" />
+    <Content Include="Views\Product\ProductDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
