@@ -27,5 +27,7 @@ namespace FoodOrder.DAL
         public virtual ICollection<OrderLine> OrderLines { get; set; }
 
         public virtual ICollection<Price> Prices { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

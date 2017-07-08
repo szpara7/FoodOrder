@@ -21,6 +21,7 @@ namespace FoodOrder.DAL
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
