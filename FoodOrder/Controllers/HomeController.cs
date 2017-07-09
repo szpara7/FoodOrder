@@ -24,7 +24,8 @@ namespace FoodOrder.Controllers
                         ProductName = x.ProductName,
                         ImageName = x.ImageName,
                         Rate = x.Rate,
-                        CategoryName = x.Category.CategoryName
+                        CategoryName = x.Category.CategoryName,
+                        ProductID = x.ProductID
                     })
                     .Take(3).ToList();
 

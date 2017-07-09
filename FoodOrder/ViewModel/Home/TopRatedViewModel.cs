@@ -11,5 +11,6 @@ namespace FoodOrder.ViewModel.Home
         public int Rate { get; set; }
         public string ImageName { get; set; }
         public string CategoryName { get; set; }
+        public int ProductID { get; set; }
     }
 }

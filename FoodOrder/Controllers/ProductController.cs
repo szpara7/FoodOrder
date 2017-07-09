@@ -62,7 +62,18 @@ namespace FoodOrder.Controllers
                         CategoryName = x.Product.Category.CategoryName,
                         Description = x.Product.Description,
                         Rate = x.Product.Rate,
-                        Price = x.Price.Value
+                        Price = x.Price.Value,
+                        Reviews = x.Product
+                        .Reviews
+                        .Select(k => new ReviewViewModel()
+                        {
+                            AddedDate = k.AdddedDate,
+                            Content = k.Content,
+                            CustomerFirstName = k.Customer.FirstName,
+                            CustomerLastName = k.Customer.LastName
+                        })
+                        .ToList(),
+                        ProductImageName = x.Product.ImageName
                     })
                     .FirstOrDefault();
 

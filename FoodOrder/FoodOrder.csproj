@@ -164,6 +164,7 @@
     <Compile Include="ViewModel\Home\TopRatedViewModel.cs" />
     <Compile Include="ViewModel\Product\ProductDetailViewModel.cs" />
     <Compile Include="ViewModel\Product\ProductsListViewModel.cs" />
+    <Compile Include="ViewModel\Product\ReviewViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
