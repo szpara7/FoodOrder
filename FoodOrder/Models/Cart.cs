@@ -8,19 +8,25 @@ namespace FoodOrder.Models
 {
     public class Cart
     {
-        private List<CartLine> lineCollection = new List<CartLine>();
+        public List<CartLine> lineCollection = new List<CartLine>();
 
-        public void AddProduct(Product product,int quantity)
+        public void AddProduct(Product product, int quantity,int price)
         {
             var cartLine = new CartLine();
+         
 
             cartLine = lineCollection
                 .Where(t => t.Product.ProductID == product.ProductID)
                 .FirstOrDefault();
 
-            if(cartLine == null)
+            if (cartLine == null)
             {
-                lineCollection.Add(new CartLine { Product = product, Quantity = quantity});
+                lineCollection.Add(new CartLine
+                {
+                    Product = product,
+                    Quantity = quantity,
+                    Price = price
+                });
             }
             else
             {
@@ -28,16 +34,14 @@ namespace FoodOrder.Models
             }
         }
 
-        public void RemoveLine(Product product)
+        public void RemoveProduct(Product product)
         {
             lineCollection.RemoveAll(t => t.Product.ProductID == product.ProductID);
         }
 
         public decimal TotalValue()
         {
-            return lineCollection.Sum(t => t.Product.Prices
-            .Where(l => l.Product.ProductID == t.Product.ProductID && l.EndDate == null)
-            .Select(x => x.Value).FirstOrDefault() * t.Quantity);      
+            return lineCollection.Sum(t => t.Quantity * t.Price);
         }
 
         public void Clear()
@@ -45,14 +49,14 @@ namespace FoodOrder.Models
             lineCollection.Clear();
         }
 
-        public IEnumerable<CartLine> Lines { get { return lineCollection; } }
+        public List<CartLine> Lines { get { return lineCollection; } }
+
     }
-
-
 
     public class CartLine
     {
         public Product Product { get; set; }
         public int Quantity { get; set; }
+        public decimal Price { get; set; }
     }
 }

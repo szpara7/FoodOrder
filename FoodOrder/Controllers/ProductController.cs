@@ -77,6 +77,9 @@ namespace FoodOrder.Controllers
                     })
                     .FirstOrDefault();
 
+                var cos = db.Prices.Where(t => t.Product.ProductID == 3 && t.EndDate == null)
+                    .Select(x => x.Value).FirstOrDefault();
+
                 return View(result);
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
