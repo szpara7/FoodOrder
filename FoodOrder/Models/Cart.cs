@@ -8,7 +8,7 @@ namespace FoodOrder.Models
 {
     public class Cart
     {
-        public List<CartLine> lineCollection = new List<CartLine>();
+        private List<CartLine> lineCollection = new List<CartLine>();
 
         public void AddProduct(Product product, int quantity,int price)
         {

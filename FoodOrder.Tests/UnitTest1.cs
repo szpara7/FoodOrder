@@ -44,6 +44,9 @@ namespace FoodOrder.Tests
 
             cart.AddProduct(product2, 3,30);
             Assert.AreEqual(2, cart.Lines.Count);
+            Assert.AreEqual(cart.Lines[0].Quantity, 3);
+            Assert.AreEqual(cart.Lines[1].Quantity, 3);
+
         }
 
         [TestMethod]
@@ -55,18 +58,9 @@ namespace FoodOrder.Tests
                 ProductName = "Prod1"
             };
 
-            var cart = new Cart()
-            {
-                lineCollection = new List<CartLine>()
-                {
-                    new CartLine()
-                    {
-                        Product = product,
-                        Price = 30,
-                        Quantity = 4
-                    }
-                }
-            };
+            var cart = new Cart();
+            cart.AddProduct(product,1,30);
+            
 
             Assert.AreEqual(1, cart.Lines.Count);
 
@@ -84,44 +78,21 @@ namespace FoodOrder.Tests
 
             };
 
+            var cart1 = new Cart();
+            cart1.AddProduct(product,4,30);
 
-            var cart1 = new Cart()
-            {
-                lineCollection = new List<CartLine>()
-                {
-                    new CartLine()
-                    {
-                        Product = product,
-                        Quantity = 4,
-                        Price = 30
-                    }
-                }
-            };
+            var cart2 = new Cart();
+            cart2.AddProduct(product, 2, 30);
 
-            var cart2 = new Cart()
-            {
-                lineCollection = new List<CartLine>()
-                {
-                    new CartLine()
-                    {
-                        Product = product,
-                        Quantity = 5,
-                        Price = 30
-                    }
-                }
-            };
-
-            var cart3 = new Cart()
-            {
-                
-            };
+            var cart3 = new Cart();
+           
 
             decimal value = cart1.TotalValue();
             decimal value2 = cart2.TotalValue();
             decimal value3 = cart3.TotalValue();
 
             Assert.AreEqual(120, value);
-            Assert.AreEqual(150, value2);
+            Assert.AreEqual(60, value2);
             Assert.AreEqual(0, value3);
         }
     }
