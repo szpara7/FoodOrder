@@ -73,7 +73,8 @@ namespace FoodOrder.Controllers
                             CustomerLastName = k.Customer.LastName
                         })
                         .ToList(),
-                        ProductImageName = x.Product.ImageName
+                        ProductImageName = x.Product.ImageName,
+                        ProductId = x.Product.ProductID
                     })
                     .FirstOrDefault();
 

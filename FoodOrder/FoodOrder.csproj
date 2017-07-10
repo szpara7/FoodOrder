@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="DAL\Category.cs" />
@@ -174,6 +175,7 @@
     <Content Include="Views\Home\_CategoriesList.cshtml" />
     <Content Include="Views\Product\ProductsList.cshtml" />
     <Content Include="Views\Product\ProductDetails.cshtml" />
+    <Content Include="Views\Cart\ShowCart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

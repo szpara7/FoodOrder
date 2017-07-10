@@ -1,0 +1,42 @@
+﻿@model FoodOrder.Models.Cart
+@{
+    ViewBag.Title = "ShowCart";
+}
+
+
+
+<div class="col-lg-12" style="font-size:x-large">
+    <h2>Cart</h2>
+    
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Quantity</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model.Lines)
+            {
+                <tr>
+                    <td>@i.Quantity</td>
+                    <td>@i.Product.ProductName</td>
+                    <td>@i.Price</td>
+                    <td>@((@i.Price * @i.Quantity))</td>
+                </tr>
+
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" align="right" style="font-weight:bolder">Razem:</td>
+                <td style="font-weight:bold">@Model.TotalValue()</td>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+
+

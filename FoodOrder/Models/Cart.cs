@@ -10,7 +10,7 @@ namespace FoodOrder.Models
     {
         private List<CartLine> lineCollection = new List<CartLine>();
 
-        public void AddProduct(Product product, int quantity,int price)
+        public void AddProduct(Product product, int quantity,decimal price)
         {
             var cartLine = new CartLine();
          
