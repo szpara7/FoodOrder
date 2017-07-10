@@ -27,8 +27,7 @@
         <a class="col-lg-pull-1"><img src="@Url.ProductImagePath(@i.CategoryName,@i.ImageName)"height="185" width="275" align="left" /></a>
         <h2>@i.ProductName</h2>
         <a href="@Url.Action("ProductDetails","Product",new { productId = @i.ProductID})">
-            <input type="submit" class="btn btn-default" value="Show details"/>
+            <input type="submit" class="btn btn-default btn-lg" value="Show details"/>
         </a>
     </div>
 }
-

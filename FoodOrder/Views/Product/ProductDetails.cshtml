@@ -9,25 +9,41 @@
             <img src="@Url.ProductImagePath(@Model.CategoryName,@Model.ProductImageName)" height="200" width="300" />
         </a>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-4">
         <h1 class="focus">@Model.ProductName</h1>
         <p>@Model.Description</p>
         <h3>@Model.Price</h3>
     </div>
+    <div class="col-lg-pull-4 " align="right">
+        <br />
+        <br />
+        <br />
+        <br />
+        <a href="#">
+            <input type="submit" class="btn btn-danger btn-lg btn-lg" value="Add to cart" />
+        </a>
+    </div>
 </div>
+
+
 <div class="col-lg-12 panel panel-primary">
     <h3>Reviews:</h3>
-    @foreach (var i in Model.Reviews)
+    @if (Model.Reviews.Capacity != 0)
     {
-        <br />
-        <div class="col-lg-12 panel-heading">
-            <p class="col-lg-8">@i.CustomerFirstName @i.CustomerLastName</p>
-            <p class="col-lg-4">@i.AddedDate</p>
-      
-        </div>
-        <div class="panel-body">@i.Content</div>
+        foreach (var i in Model.Reviews)
+        {
+            <br />
+            <div class="col-lg-12 panel-heading">
+                <p class="col-lg-8">@i.CustomerFirstName @i.CustomerLastName</p>
+                <p class="col-lg-4">@i.AddedDate</p>
+
+            </div>
+            <div class="panel-body">@i.Content</div>
+        }
+    }
+    else
+    {
+        <p class="col-lg-12">-------------------</p>
     }
 </div>
-
-
 

@@ -42,7 +42,7 @@ namespace FoodOrder.Controllers
           
         }
 
-        public ActionResult ProductDetails(int productId)
+        public ActionResult ProductDetails(int productId = 1)
         {
             //todo: change layout
             using (var db = new DbCtx())
