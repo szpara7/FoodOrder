@@ -9,7 +9,7 @@ namespace FoodOrder.DAL
 {
     public class Customer
     {
-        public int CUstomerID { get; set; }
+        public int CustomerID { get; set; }
 
         [MaxLength(15), Required]
         public string FirstName { get; set; }
