@@ -1,4 +1,5 @@
 ﻿using FoodOrder.DAL;
+using FoodOrder.Interfaces.Abstract;
 using FoodOrder.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,14 @@ namespace FoodOrder.Controllers
 {
     public class CartController : Controller
     {
+        private IProductRepository productRepository;
+        private IPriceRepository priceRepository;
+
+        public CartController(IProductRepository productRepository, IPriceRepository priceRepository)
+        {
+            this.productRepository = productRepository;
+            this.priceRepository = priceRepository;
+        }
         // GET: Cart
         public ActionResult ShowCart()
         {
@@ -17,27 +26,26 @@ namespace FoodOrder.Controllers
         }
 
 
-        public ActionResult AddToCart(int productId, string returnUrl = "asd")
+        public ActionResult AddToCart(int productId)
         {
             Product product;
             decimal price;
-            using (var db = new DbCtx())
-            {
-                product = db.Products
-                    .Where(t => t.ProductID == productId)
-                    .FirstOrDefault();
 
-                price = db.Prices
-                    .Where(t => t.Product.ProductID == productId)
-                    .Select(x => x.Value)
-                    .FirstOrDefault();
-            }
+            product = productRepository.GetAll()
+                .Where(t => t.ProductID == productId)
+                .FirstOrDefault();
+
+            price = priceRepository.GetAll()
+                .Where(t => t.Product.ProductID == productId)
+                .Select(x => x.Value)
+                .FirstOrDefault();
+
             if (product != null)
             {
                 GetCart().AddProduct(product, 1, price);
             }
 
-            return RedirectToAction("Index","Home");  //todo: wracanie do tej strony
+            return RedirectToAction("Index", "Home");  //todo: wracanie do tej strony
         }
 
         public ActionResult RemoveFromCart(int productId = 3, string returnUrl = "asd")
@@ -54,7 +62,7 @@ namespace FoodOrder.Controllers
             {
                 GetCart().RemoveProduct(product);
             }
-            
+
             return RedirectToAction("Index", "Home"); //todo : wracanie do strony z ktorej wywoluje sie akcje
         }
 
@@ -67,7 +75,6 @@ namespace FoodOrder.Controllers
                 cart = new Cart();
                 Session["Cart"] = cart;
             }
-
             return cart;
         }
     }

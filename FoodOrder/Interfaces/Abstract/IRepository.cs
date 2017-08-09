@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrder.Interfaces.Abstract
 {
-    interface IRepository<T>
+    public interface IRepository<T>
     {
         IEnumerable<T> GetAll();
         T GetById(int? objectId);

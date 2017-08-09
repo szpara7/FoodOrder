@@ -14,7 +14,6 @@ namespace FoodOrder.Models
         {
             var cartLine = new CartLine();
          
-
             cartLine = lineCollection
                 .Where(t => t.Product.ProductID == product.ProductID)
                 .FirstOrDefault();

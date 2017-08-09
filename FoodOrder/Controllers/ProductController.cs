@@ -1,4 +1,5 @@
 ﻿using FoodOrder.DAL;
+using FoodOrder.Interfaces.Abstract;
 using FoodOrder.ViewModel.Product;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,18 @@ namespace FoodOrder.Controllers
 {
     public class ProductController : Controller
     {
+        private IProductRepository productRepository;
+        private IPriceRepository priceRepository;
+        public ProductController(IProductRepository productRepository, IPriceRepository priceRepository)
+        {
+            this.productRepository = productRepository;
+            this.priceRepository = priceRepository;
+        }
         // GET: ProductDetails
         public ActionResult ProductsList(string categoryName)
         {
-            using (var db = new DbCtx())
-            {
-                var result = db.Products
-                    .Join(db.Prices, Product => Product.ProductID, Category => Category.Product.ProductID,
+                var result = productRepository.GetAll()
+                    .Join(priceRepository.GetAll(), Product => Product.ProductID, Category => Category.Product.ProductID,
                     (t, p) => new
                     {
                         Product = t,
@@ -36,19 +42,19 @@ namespace FoodOrder.Controllers
                     }).
                     ToList();
 
-                return View(result);
-            }
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-          
+                if(result.Capacity == 0)
+                {
+                    ViewBag.ProductCount = "Any products in this category";
+                }
+
+                return View(result);          
         }
 
         public ActionResult ProductDetails(int productId = 1)
         {
             //todo: change layout
-            using (var db = new DbCtx())
-            {
-                var result = db.Products
-                    .Join(db.Prices, p => p.ProductID, t => t.Product.ProductID,
+                var result = productRepository.GetAll()
+                    .Join(priceRepository.GetAll(), p => p.ProductID, t => t.Product.ProductID,
                     (p, t) => new
                     {
                         Product = p,
@@ -78,13 +84,7 @@ namespace FoodOrder.Controllers
                     })
                     .FirstOrDefault();
 
-                var cos = db.Prices.Where(t => t.Product.ProductID == 3 && t.EndDate == null)
-                    .Select(x => x.Value).FirstOrDefault();
-
-                return View(result);
-            }
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                
+                return View(result);                
         }
     }
 }

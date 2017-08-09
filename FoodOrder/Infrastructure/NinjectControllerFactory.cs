@@ -1,4 +1,6 @@
-﻿using Ninject;
+﻿using FoodOrder.Abstract;
+using FoodOrder.Interfaces.Abstract;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,14 @@ namespace FoodOrder.Infrastructure
         
         private void AddBindings()
         {
-
+            ninjectKernel.Bind<ICategoryRepository>().To<CategoryRepository>();
+            ninjectKernel.Bind<ICustomerRepository>().To<CustomerRepository>();
+            ninjectKernel.Bind<IEmployeeRepository>().To<EmployeeRepository>();
+            ninjectKernel.Bind<IOrderLineRepository>().To<OrderLineRepository>();
+            ninjectKernel.Bind<IOrderRepository>().To<OrderRepository>();
+            ninjectKernel.Bind<IPriceRepository>().To<PriceRepository>();
+            ninjectKernel.Bind<IProductRepository>().To<ProductRepository>();
+            ninjectKernel.Bind<IReviewRepository>().To<ReviewRepository>();
         }
     }
 }

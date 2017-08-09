@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrder.Interfaces.Abstract
 {
-    interface ICustomerRepository : IRepository<Customer>
+    public interface ICustomerRepository : IRepository<Customer>
     {
     }
 }
