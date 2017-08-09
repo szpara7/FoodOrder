@@ -22,6 +22,8 @@ namespace FoodOrder.DAL
 
         public string ImageName { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual Category Category { get; set; }
 
         public virtual ICollection<OrderLine> OrderLines { get; set; }

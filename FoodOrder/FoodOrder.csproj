@@ -140,6 +140,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\CategoryRepository.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -158,6 +159,19 @@
     </Compile>
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Infrastructure\UrlHelpers.cs" />
+    <Compile Include="Interfaces\Abstract\ICategoryRepository.cs" />
+    <Compile Include="Interfaces\Abstract\ICustomerRepository.cs" />
+    <Compile Include="Interfaces\Abstract\IEmployeeRepository.cs" />
+    <Compile Include="Interfaces\Abstract\IOrderLineRepository.cs" />
+    <Compile Include="Interfaces\Abstract\IOrderRepository.cs" />
+    <Compile Include="Interfaces\Abstract\IPriceRepository.cs" />
+    <Compile Include="Interfaces\Abstract\IProductRepository.cs" />
+    <Compile Include="Interfaces\Abstract\IRepository.cs" />
+    <Compile Include="Interfaces\Abstract\IReviewRepository.cs" />
+    <Compile Include="Migrations\201708091330123_add fields %27IsDeleted,...%27.cs" />
+    <Compile Include="Migrations\201708091330123_add fields %27IsDeleted,...%27.Designer.cs">
+      <DependentUpon>201708091330123_add fields %27IsDeleted,...%27.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,7 +197,11 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708091330123_add fields %27IsDeleted,...%27.resx">
+      <DependentUpon>201708091330123_add fields %27IsDeleted,...%27.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

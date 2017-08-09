@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -12,6 +13,12 @@ namespace FoodOrder.DAL
         public string Content { get; set; }
 
         public DateTime AdddedDate { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsDeleted { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsEdited { get; set; }
 
         public virtual Product Products { get; set; }
 

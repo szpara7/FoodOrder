@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace FoodOrder.DAL
 {
@@ -30,6 +31,9 @@ namespace FoodOrder.DAL
 
         [Required,EmailAddress]
         public string EMail { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsDeleted { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
 

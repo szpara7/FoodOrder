@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace FoodOrder.DAL
 {
@@ -28,6 +29,9 @@ namespace FoodOrder.DAL
         public virtual Customer Customer { get; set; }
 
         public virtual Employee Employee { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsCanceled { get; set; }
 
         public virtual ICollection<OrderLine> OrderLines { get; set; }
 
