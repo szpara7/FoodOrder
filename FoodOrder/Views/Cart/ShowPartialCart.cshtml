@@ -1,0 +1,20 @@
+﻿@model FoodOrder.ViewModel.Cart.CartViewModel
+
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        Cart
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        @foreach (var i in Model.CartLine)
+        {
+            <li>
+                <div>
+                    <h4>@i.ProductName @i.Price @i.Quantity</h4>
+                </div>
+            </li>
+        }
+        <text>@ViewBag.CartLineCount</text>
+    </ul>
+    
+</div>

@@ -182,6 +182,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\Cart\CartViewModel.cs" />
     <Compile Include="ViewModel\Home\HomeIndexViewModel.cs" />
     <Compile Include="ViewModel\Home\MostOrdersViewModel.cs" />
     <Compile Include="ViewModel\Home\TopRatedViewModel.cs" />
@@ -197,6 +198,7 @@
     <Content Include="Views\Product\ProductsList.cshtml" />
     <Content Include="Views\Product\ProductDetails.cshtml" />
     <Content Include="Views\Cart\ShowCart.cshtml" />
+    <Content Include="Views\Cart\ShowPartialCart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
