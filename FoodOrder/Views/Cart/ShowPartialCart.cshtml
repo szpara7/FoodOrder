@@ -1,8 +1,9 @@
 ﻿@model FoodOrder.ViewModel.Cart.CartViewModel
 
 <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-        Cart
+    <button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown">
+        <span class="fa fa-shopping-cart"></span>
+        <span class="badge">@Model.TotalValue</span>
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
@@ -14,7 +15,7 @@
                 </div>
             </li>
         }
-        <text>@ViewBag.CartLineCount</text>
+        <text>@ViewBag.CartEmpty</text>
     </ul>
     
 </div>

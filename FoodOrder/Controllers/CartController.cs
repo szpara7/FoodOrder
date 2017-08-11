@@ -63,7 +63,7 @@ namespace FoodOrder.Controllers
 
             if(!model.CartLine.Any())
             {
-                ViewBag.CartLineCount = "Cart empty!";
+                ViewBag.CartEmpty = "Cart empty!";
             }
 
             return PartialView(model);
@@ -88,7 +88,7 @@ namespace FoodOrder.Controllers
                 GetCart().AddProduct(product, 1, price);
             }
             
-            return RedirectToAction("Index", "Home");  //todo: wracanie do tej strony
+            return RedirectToAction("ShowPartialCart", "Cart");  //todo: wracanie do tej strony
         }
 
         public ActionResult RemoveFromCart(int productId = 3, string returnUrl = "asd")

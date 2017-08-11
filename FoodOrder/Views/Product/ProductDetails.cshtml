@@ -19,9 +19,10 @@
         <br />
         <br />
         <br />
-        <a href="@Url.Action("AddToCart","Cart", new { productId = Model.ProductId})">
-            <input type="submit" class="btn btn-danger btn-lg btn-lg" value="Add to cart" />
-        </a>
+        @Ajax.ActionLink("Add to cart", "AddtoCart", "Cart", new { productId = Model.ProductId }, new AjaxOptions
+     {
+         UpdateTargetId = "shoppingCart"
+     }, new { @class = "top-right btn btn-danger btn-lg" })
     </div>
 </div>
 
