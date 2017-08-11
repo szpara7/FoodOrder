@@ -1,0 +1,36 @@
+﻿@model FoodOrder.ViewModel.Cart.CartViewModel
+
+
+<thead>
+    <tr>
+        <th>Quantity</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Value</th>
+        <th></th>
+    </tr>
+</thead>
+
+<tbody>
+    @foreach (var i in Model.CartLine)
+            {
+        <tr>
+            <td>@i.Quantity</td>
+            <td>@i.ProductName</td>
+            <td>@i.Price</td>
+            <td>@((@i.Price * @i.Quantity))</td>
+            <td>
+                @Ajax.ActionLink(" ", "RemoveFromCart", "Cart", new { productId = @i.ProductId, returnUrl = "ShowCartDataTable" }, new AjaxOptions
+           {
+               UpdateTargetId = "tableBodyShowCart"
+           }, new { @class = "fa fa-times" })
+            </td>
+        </tr>
+    }
+</tbody>
+<tfoot>
+    <tr>
+        <td colspan="3" align="right" style="font-weight:bolder">Total:</td>
+        <td style="font-weight:bold">@Model.TotalValue</td>
+    </tr>
+</tfoot>

@@ -7,15 +7,36 @@
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
+        <li>
+            <label></label>
+            <label>Product</label>
+            <label>Price</label>
+            <label>Quantity</label>
+        </li>
         @foreach (var i in Model.CartLine)
         {
             <li>
                 <div>
-                    <h4>@i.ProductName @i.Price @i.Quantity</h4>
+                    <h4>
+
+                        @Ajax.ActionLink(" ", "RemoveFromCart", "Cart", new { productId = @i.ProductId }, new AjaxOptions
+                   {
+                       UpdateTargetId = "shoppingCart"
+                   }, new { @class = "fa fa-times" })
+
+                        <text>@i.ProductName</text>
+                        <text>@i.Price</text>
+                        <text>@i.Quantity</text>
+
+                    </h4>
                 </div>
             </li>
         }
         <text>@ViewBag.CartEmpty</text>
+        <li>
+            <a href="@Url.Action("ShowCart","Cart")">
+                <input type="submit" class="btn btn-primary" value="Continue"/>
+            </a>
+        </li>        
     </ul>
-    
 </div>

@@ -23,6 +23,11 @@ namespace FoodOrder.Controllers
         // GET: Cart
         public ActionResult ShowCart()
         {
+            return View();
+        }
+
+        public ActionResult ShowCartDataTable()
+        {
             var model = new CartViewModel();
             var data = GetCart().Lines;
 
@@ -30,30 +35,7 @@ namespace FoodOrder.Controllers
             {
                 model.CartLine.Add(new CartLineViewModel()
                 {
-                    Price = i.Price,
-                    ProductName = i.Product.ProductName,
-                    Quantity = i.Quantity
-                });
-            }
-            model.TotalValue = GetCart().TotalValue();
-
-            if (model.CartLine.Capacity == 0)
-            {
-                ViewBag.CartCount = "Cart empty";
-            }
-
-            return View(model);
-        }
-
-        public ActionResult ShowPartialCart()
-        {
-            var model = new CartViewModel();
-            List<CartLine> data = GetCart().Lines;
-            
-            foreach(var i in data)
-            {
-                model.CartLine.Add(new CartLineViewModel()
-                {
+                    ProductId = i.Product.ProductID,
                     Price = i.Price,
                     ProductName = i.Product.ProductName,
                     Quantity = i.Quantity
@@ -62,6 +44,31 @@ namespace FoodOrder.Controllers
             model.TotalValue = GetCart().TotalValue();
 
             if(!model.CartLine.Any())
+            {
+                ViewBag.CartEmpty = "Cart Empty!";
+            }
+
+            return PartialView(model);
+        }
+
+        public ActionResult ShowPartialCart()
+        {
+            var model = new CartViewModel();
+            List<CartLine> data = GetCart().Lines;
+
+            foreach (var i in data)
+            {
+                model.CartLine.Add(new CartLineViewModel()
+                {
+                    ProductId = i.Product.ProductID,
+                    Price = i.Price,
+                    ProductName = i.Product.ProductName,
+                    Quantity = i.Quantity
+                });
+            }
+            model.TotalValue = GetCart().TotalValue();
+
+            if (!model.CartLine.Any())
             {
                 ViewBag.CartEmpty = "Cart empty!";
             }
@@ -73,10 +80,8 @@ namespace FoodOrder.Controllers
         {
             Product product;
             decimal price;
-           
-            product = productRepository.GetAll()
-                .Where(t => t.ProductID == productId)
-                .FirstOrDefault();
+
+            product = productRepository.GetById(productId);
 
             price = priceRepository.GetAll()
                 .Where(t => t.Product.ProductID == productId)
@@ -87,26 +92,20 @@ namespace FoodOrder.Controllers
             {
                 GetCart().AddProduct(product, 1, price);
             }
-            
+
             return RedirectToAction("ShowPartialCart", "Cart");  //todo: wracanie do tej strony
         }
 
-        public ActionResult RemoveFromCart(int productId = 3, string returnUrl = "asd")
+        public ActionResult RemoveFromCart(int productId,string returnUrl="ShowPartialCart")
         {
-            Product product;
+            Product product = productRepository.GetById(productId);          
 
-            using (var db = new DbCtx())
-            {
-                product = db.Products
-                    .Where(t => t.ProductID == productId)
-                    .FirstOrDefault();
-            }
             if (product != null)
             {
                 GetCart().RemoveProduct(product);
             }
 
-            return RedirectToAction("Index", "Home"); //todo : wracanie do strony z ktorej wywoluje sie akcje
+            return RedirectToAction(returnUrl, "Cart"); //todo : wracanie do strony z ktorej wywoluje sie akcje
         }
 
         private Cart GetCart()
