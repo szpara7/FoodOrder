@@ -28,8 +28,8 @@ namespace FoodOrder.Controllers
 
         public ActionResult ShowCartDataTable()
         {
-            var model = new CartViewModel();
-            var data = GetCart().Lines;
+            CartViewModel model = new CartViewModel();
+            List<CartLine> data = GetCart().Lines;
 
             foreach (var i in data)
             {
@@ -43,7 +43,7 @@ namespace FoodOrder.Controllers
             }
             model.TotalValue = GetCart().TotalValue();
 
-            if(!model.CartLine.Any())
+            if (!model.CartLine.Any())
             {
                 ViewBag.CartEmpty = "Cart Empty!";
             }
@@ -53,7 +53,7 @@ namespace FoodOrder.Controllers
 
         public ActionResult ShowPartialCart()
         {
-            var model = new CartViewModel();
+            CartViewModel model = new CartViewModel();
             List<CartLine> data = GetCart().Lines;
 
             foreach (var i in data)
@@ -78,12 +78,9 @@ namespace FoodOrder.Controllers
 
         public ActionResult AddToCart(int productId)
         {
-            Product product;
-            decimal price;
+            Product product = productRepository.GetById(productId);
 
-            product = productRepository.GetById(productId);
-
-            price = priceRepository.GetAll()
+            decimal price = priceRepository.GetAll()
                 .Where(t => t.Product.ProductID == productId)
                 .Select(x => x.Value)
                 .FirstOrDefault();
@@ -96,16 +93,21 @@ namespace FoodOrder.Controllers
             return RedirectToAction("ShowPartialCart", "Cart");  //todo: wracanie do tej strony
         }
 
-        public ActionResult RemoveFromCart(int productId,string returnUrl="ShowPartialCart")
+        public ActionResult RemoveFromCart(int productId, string returnUrl = "ShowPartialCart")
         {
-            Product product = productRepository.GetById(productId);          
+            Product product = productRepository.GetById(productId);
 
             if (product != null)
             {
                 GetCart().RemoveProduct(product);
             }
+            return RedirectToAction(returnUrl, "Cart");
+        }
 
-            return RedirectToAction(returnUrl, "Cart"); //todo : wracanie do strony z ktorej wywoluje sie akcje
+        public ActionResult ClearCart(string returnUrl)
+        {
+            GetCart().Clear();
+            return RedirectToAction(returnUrl, "Cart");
         }
 
         private Cart GetCart()

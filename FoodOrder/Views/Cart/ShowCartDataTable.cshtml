@@ -1,6 +1,6 @@
 ﻿@model FoodOrder.ViewModel.Cart.CartViewModel
 
-
+<h2>@ViewBag.CartEmpty</h2>
 <thead>
     <tr>
         <th>Quantity</th>
@@ -23,7 +23,7 @@
                 @Ajax.ActionLink(" ", "RemoveFromCart", "Cart", new { productId = @i.ProductId, returnUrl = "ShowCartDataTable" }, new AjaxOptions
            {
                UpdateTargetId = "tableBodyShowCart"
-           }, new { @class = "fa fa-times" })
+           }, new { @class = "fa fa-times", @title = "Delete"})
             </td>
         </tr>
     }
