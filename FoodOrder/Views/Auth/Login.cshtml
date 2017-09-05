@@ -10,15 +10,25 @@
             <h2 class="form-signin-heading">Please sign in</h2>
             <label>Email</label>
             @Html.TextBoxFor(t => t.Email, new { @class = "form-control", @placeholder = "Email address" })
+            if (TempData["EmailNotExist"] != null)
+            {
+                <label style="color:red" >@TempData["EmailNotExist"]</label>
+            }
+            <label style="color:red" >@Html.ValidationMessageFor(t => t.Email)</label>
 
             <label>Password</label>
             @Html.PasswordFor(t => t.Password, new { @class = "form-control", @placeholder = "Password" })
+            if (TempData["PasswordNotExist"] != null)
+            {
+                <label style="color:red">@TempData["PasswordNotExist"]</label>
+            }
+            <label style="color:red">@Html.ValidationMessageFor(t => t.Password)</label>
 
 
             <label>Remember me</label>
             @Html.CheckBoxFor(t => t.RemeberMe)
             <br />
-            <input type="submit" class="btn btn-primary" value="Sign in" />
+            <input type="submit" class="btn btn-primary" value="Log in" />
         }
     </div>
 </div>

@@ -8,10 +8,10 @@ namespace FoodOrder.ViewModel.Auth
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Field E-Mail is required")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Field Password is required")]
         public string Password { get; set; }
 
         public bool RemeberMe { get; set; }
