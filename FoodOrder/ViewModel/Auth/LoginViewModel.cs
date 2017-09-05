@@ -11,7 +11,7 @@ namespace FoodOrder.ViewModel.Auth
         [Required(ErrorMessage = "Field E-Mail is required")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Field Password is required")]
+        [Required(ErrorMessage = "Field Password is required"),DataType(DataType.Password)]
         public string Password { get; set; }
 
         public bool RemeberMe { get; set; }

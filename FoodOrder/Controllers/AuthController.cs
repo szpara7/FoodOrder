@@ -80,5 +80,49 @@ namespace FoodOrder.Controllers
 
             return RedirectToAction("Index", "Home");
         }       
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var isExistEmail = customerRepository.GetAll().Any(t => t.EMail == model.Email);
+            if(isExistEmail)
+            {
+                TempData["EmailAlreadyExist"] = "E-mail alredy exist";
+                return View(model);
+            }
+
+            if(model.Password != model.Password2)
+            {
+                TempData["DiffrencePasswords"] = "Passwords are diffrence";
+                return View(model);
+            }
+
+            var hashPassword = Crypto.HashPassword(model.Password);
+
+            customerRepository.Add(new Customer
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                City = model.City,
+                Street = model.Street,
+                PostCode = model.PostCode,
+                Phone = model.Phone,
+                EMail = model.Email,
+                HashPassword = hashPassword,
+                IsDeleted = false
+            });
+
+            return RedirectToAction("Index", "Home"); //przekierowanie do view o potwierdzeniu meila
+        }
     }
 }

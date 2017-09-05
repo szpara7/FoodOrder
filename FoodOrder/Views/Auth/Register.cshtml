@@ -1,0 +1,57 @@
+﻿@model FoodOrder.ViewModel.Auth.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="well col-lg-6">
+    <h3>Register</h3>
+    @using (Html.BeginForm("Register", "Auth"))
+    {
+        @Html.Label("First name")
+        @Html.TextBoxFor(t => t.FirstName, new { @class = "form-control", @placeholder = "First name" })
+        @Html.ValidationMessageFor(t => t.FirstName)
+
+        @Html.Label("Last name")
+        @Html.TextBoxFor(t => t.LastName, new { @class = "form-control", @placeholder = "Last name" })
+        @Html.ValidationMessageFor(t => t.LastName)
+
+        @Html.Label("City")
+        @Html.TextBoxFor(t => t.City, new { @class = "form-control", @placeholder = "City" })
+        @Html.ValidationMessageFor(t => t.City)
+
+        @Html.Label("Street")
+        @Html.TextBoxFor(t => t.Street, new { @class = "form-control", @placeholder = "Street" })
+        @Html.ValidationMessageFor(t => t.Street)
+
+        @Html.Label("Post code")
+        @Html.TextBoxFor(t => t.PostCode, new { @class = "form-control", @placeholder = "Post code" })
+        @Html.ValidationMessageFor(t => t.PostCode)
+
+        @Html.Label("Phone")
+        @Html.TextBoxFor(t => t.Phone, new { @class = "form-control", @placeholder = "Phone", @type = "tel" })
+        @Html.ValidationMessageFor(t => t.Phone)
+
+        @Html.Label("E-mail")
+        @Html.TextBoxFor(t => t.Email, new { @class = "form-control", @placeholder = "E-Mail" })
+        @Html.ValidationMessageFor(t => t.Email)
+        if (TempData["EmailAlreadyExist"] != null)
+        {
+               <div>@TempData["EmailAlreadyExist"]</div> 
+        }
+
+        @Html.Label("Password")
+        @Html.PasswordFor(t => t.Password, new { @class = "form-control", @placeholder = "Password" })
+        @Html.ValidationMessageFor(t => t.Password)
+
+        @Html.Label("Repeat Password")
+        @Html.PasswordFor(t => t.Password2, new { @class = "form-control", @placeholder = "Password" })
+        @Html.ValidationMessageFor(t => t.Password2)
+        if (TempData["DiffrencePasswords"] != null)
+        {
+            <div>@TempData["DiffrencePasswords"]</div>
+        }
+        <br />
+        <input type="submit" class="btn btn-primary" value="Register" />
+    }
+
+</div>

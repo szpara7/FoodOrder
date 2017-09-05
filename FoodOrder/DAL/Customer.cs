@@ -11,16 +11,16 @@ namespace FoodOrder.DAL
     {
         public int CustomerID { get; set; }
 
-        [MaxLength(15), Required]
+        [MaxLength(20), Required]
         public string FirstName { get; set; }
 
-        [MaxLength(15), Required]
+        [MaxLength(30), Required]
         public string LastName { get; set; }
 
-        [MaxLength(25), Required]
+        [MaxLength(50), Required]
         public string City { get; set; }
 
-        [MaxLength(15),Required]
+        [MaxLength(50),Required]
         public string Street { get; set; }
 
         [Required,StringLength(6)]
