@@ -69,6 +69,16 @@ namespace FoodOrder.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-         
+        
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+
+            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, "");
+            cookie.Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies.Add(cookie);
+
+            return RedirectToAction("Index", "Home");
+        }       
     }
 }
