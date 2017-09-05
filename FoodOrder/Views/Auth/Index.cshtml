@@ -1,0 +1,33 @@
+﻿@model string
+
+@if (!Html.UserIsLogged())
+{
+    <div class="well well-sm">
+        <a href="@Url.Action("Login","Auth")">
+            <input type="submit" class="btn btn-primary" value="Log in" />
+        </a>
+
+        <a href="@Url.Action("Register","Auth")">
+            <input type="submit" class="btn btn-primary" value="Register" />
+        </a>
+    </div>
+}
+else
+{
+    <div class="dropdown">
+        <button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown">
+            <h6>Welcome @Model!!!</h6>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="@Url.Action("LogOut","Auth")">
+                    <input type="submit" class="btn btn-block" value="Log out"/>
+                </a>
+                <a href="#">
+                    <input type="submit" class="btn btn-block" value="Edit"/>
+                </a>
+            </li>
+        </ul>
+    </div>
+}

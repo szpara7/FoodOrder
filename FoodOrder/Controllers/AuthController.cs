@@ -23,6 +23,13 @@ namespace FoodOrder.Controllers
         }
         // GET: Auth
 
+        public ActionResult Index()
+        {
+            string currentUser = HttpContext.User.Identity.Name ?? " ";
+
+            return PartialView("Index", currentUser);
+        }
+
         public ActionResult Login()
         {
             return View();
@@ -31,7 +38,7 @@ namespace FoodOrder.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
@@ -39,16 +46,16 @@ namespace FoodOrder.Controllers
             var isCustomerEmail = customerRepository.GetAll().Any(t => t.EMail == model.Email);
             var isEmployeeEmail = employeeRepository.GetAll().Any(t => t.Email == model.Email);
 
-            if(!isCustomerEmail && !isEmployeeEmail)
+            if (!isCustomerEmail && !isEmployeeEmail)
             {
                 TempData["EmailNotExist"] = "Wrong username";
                 return View(model);
             }
 
-            if(isCustomerEmail == true)
+            if (isCustomerEmail == true)
             {
-                var customerPassword = customerRepository.GetAll().Where(t => t.EMail == model.Email).Select(t => t.HashPassword).FirstOrDefault(); 
-                if(!Crypto.VerifyHashedPassword(customerPassword, model.Password))
+                var customerPassword = customerRepository.GetAll().Where(t => t.EMail == model.Email).Select(t => t.HashPassword).FirstOrDefault();
+                if (!Crypto.VerifyHashedPassword(customerPassword, model.Password))
                 {
                     TempData["PasswordNotExist"] = "Wrong password";
                     return View(model);
@@ -59,7 +66,7 @@ namespace FoodOrder.Controllers
             else
             {
                 var employeePassword = employeeRepository.GetAll().Where(t => t.Email == model.Email).Select(t => t.HashPassword).FirstOrDefault();
-                if(!Crypto.VerifyHashedPassword(employeePassword, model.Password))
+                if (!Crypto.VerifyHashedPassword(employeePassword, model.Password))
                 {
                     TempData["PasswordNotExist"] = "Wrong password";
                     return View(model);
@@ -70,7 +77,7 @@ namespace FoodOrder.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        
+
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
@@ -80,7 +87,7 @@ namespace FoodOrder.Controllers
             Response.Cookies.Add(cookie);
 
             return RedirectToAction("Index", "Home");
-        }       
+        }
 
         public ActionResult Register()
         {
@@ -90,19 +97,19 @@ namespace FoodOrder.Controllers
         [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
             var isExistEmail = customerRepository.GetAll().Any(t => t.EMail == model.Email);
-            if(isExistEmail)
+            if (isExistEmail)
             {
                 TempData["EmailAlreadyExist"] = "E-mail alredy exist";
                 return View(model);
             }
 
-            if(model.Password != model.Password2)
+            if (model.Password != model.Password2)
             {
                 TempData["DiffrencePasswords"] = "Passwords are diffrence";
                 return View(model);

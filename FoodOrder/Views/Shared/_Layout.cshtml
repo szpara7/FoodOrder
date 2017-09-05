@@ -21,13 +21,16 @@
     <div class="navbar navbar-inverse navbar-fixed-top row">
        <div class="container-fluid">
            <div class="navbar-header col-lg-12">
-               <div class="col-lg-10">
+               <div class="col-lg-8">
                    <a class="navbar-brand" href="@Url.Action("Index","Home")">
                        FoodOrder
                    </a>
                </div>
                <div class="col-lg-2" id="shoppingCart">
                    @Html.Action("ShowPartialCart", "Cart")
+               </div>
+               <div class="col-lg-2">
+                   @Html.Action("Index","Auth")
                </div>
            </div>
        </div>
