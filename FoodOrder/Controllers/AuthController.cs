@@ -22,6 +22,7 @@ namespace FoodOrder.Controllers
             this.customerRepository = customerRepository;
         }
         // GET: Auth
+
         public ActionResult Login()
         {
             return View();
