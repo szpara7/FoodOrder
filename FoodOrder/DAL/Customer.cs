@@ -32,6 +32,9 @@ namespace FoodOrder.DAL
         [Required,EmailAddress]
         public string EMail { get; set; }
 
+        [Required]
+        public string HashPassword { get; set; }
+
         [DefaultValue(false)]
         public bool IsDeleted { get; set; }
 

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace FoodOrder.Controllers
 {
@@ -62,6 +63,11 @@ namespace FoodOrder.Controllers
                 .OrderBy(a => Guid.NewGuid())
                 .Take(3)
                 .ToList();
+
+            if(HttpContext.User.Identity.IsAuthenticated)
+            {
+                string i = HttpContext.User.Identity.Name;
+            }
 
             return View(products);
         }

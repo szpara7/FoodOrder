@@ -22,7 +22,7 @@
                         @Ajax.ActionLink(" ", "RemoveFromCart", "Cart", new { productId = @i.ProductId }, new AjaxOptions
                    {
                        UpdateTargetId = "shoppingCart"
-                   }, new { @class = "fa fa-times" })
+                   }, new { @class = "fa fa-times",@title = "Delete" })
 
                         <text>@i.ProductName</text>
                         <text>@i.Price</text>
@@ -34,9 +34,16 @@
         }
         <text>@ViewBag.CartEmpty</text>
         <li>
-            <a href="@Url.Action("ShowCart","Cart")">
-                <input type="submit" class="btn btn-primary" value="Continue"/>
+            <a>
+                @Html.ActionLink("Continue", "ShowCart", "Cart", new { @class = "btn btn-primary" })
             </a>
-        </li>        
+            <a>
+                @Ajax.ActionLink("Clear", "ClearCart", "Cart", new { returnUrl = "ShowPartialCart" }, new AjaxOptions
+           {
+               UpdateTargetId = "shoppingCart"
+           },
+           new { @class = "btn btn-danger" })
+            </a>
+        </li>
     </ul>
 </div>

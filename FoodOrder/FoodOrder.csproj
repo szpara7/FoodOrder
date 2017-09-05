@@ -161,6 +161,7 @@
     <Compile Include="Abstract\ProductRepository.cs" />
     <Compile Include="Abstract\ReviewRepository.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\Auth\LoginViewModel.cs" />
     <Compile Include="ViewModel\Cart\CartViewModel.cs" />
     <Compile Include="ViewModel\Home\HomeIndexViewModel.cs" />
     <Compile Include="ViewModel\Home\MostOrdersViewModel.cs" />
@@ -214,6 +216,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Cart\ShowCartDataTable.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -226,6 +229,7 @@
       <DependentUpon>201708091330123_add fields %27IsDeleted,...%27.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

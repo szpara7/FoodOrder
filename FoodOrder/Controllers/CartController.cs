@@ -47,7 +47,7 @@ namespace FoodOrder.Controllers
             {
                 ViewBag.CartEmpty = "Cart Empty!";
             }
-
+            
             return PartialView(model);
         }
 
@@ -90,7 +90,7 @@ namespace FoodOrder.Controllers
                 GetCart().AddProduct(product, 1, price);
             }
 
-            return RedirectToAction("ShowPartialCart", "Cart");  //todo: wracanie do tej strony
+            return RedirectToAction("ShowPartialCart", "Cart");
         }
 
         public ActionResult RemoveFromCart(int productId, string returnUrl = "ShowPartialCart")

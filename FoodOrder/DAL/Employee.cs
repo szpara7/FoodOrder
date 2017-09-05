@@ -23,6 +23,9 @@ namespace FoodOrder.DAL
         public string Email { get; set; }
 
         [Required]
+        public string HashPassword { get; set; }
+
+        [Required]
         public DateTime HireDate { get; set; }
 
         public Role Role { get; set; }
