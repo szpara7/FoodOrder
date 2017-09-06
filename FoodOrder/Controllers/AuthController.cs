@@ -1,4 +1,5 @@
 ﻿using FoodOrder.DAL;
+using FoodOrder.Interfaces;
 using FoodOrder.Interfaces.Abstract;
 using FoodOrder.ViewModel.Auth;
 using System;
@@ -15,11 +16,13 @@ namespace FoodOrder.Controllers
     {
         private IEmployeeRepository employeeRepository;
         private ICustomerRepository customerRepository;
+        private IEmailSender emailSender;
 
-        public AuthController(IEmployeeRepository employeeRepository, ICustomerRepository customerRepository)
+        public AuthController(IEmployeeRepository employeeRepository, ICustomerRepository customerRepository, IEmailSender emailSender)
         {
             this.employeeRepository = employeeRepository;
             this.customerRepository = customerRepository;
+            this.emailSender = emailSender;
         }
         // GET: Auth
 
@@ -71,7 +74,7 @@ namespace FoodOrder.Controllers
                     TempData["PasswordNotExist"] = "Wrong password";
                     return View(model);
                 }
-
+                
                 FormsAuthentication.SetAuthCookie(model.Email, model.RemeberMe);
             }
 

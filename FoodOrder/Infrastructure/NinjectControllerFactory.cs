@@ -1,5 +1,7 @@
 ﻿using FoodOrder.Abstract;
+using FoodOrder.Interfaces;
 using FoodOrder.Interfaces.Abstract;
+using FoodOrder.Models;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -34,6 +36,8 @@ namespace FoodOrder.Infrastructure
             ninjectKernel.Bind<IPriceRepository>().To<PriceRepository>();
             ninjectKernel.Bind<IProductRepository>().To<ProductRepository>();
             ninjectKernel.Bind<IReviewRepository>().To<ReviewRepository>();
+
+            ninjectKernel.Bind<IEmailSender>().To<EmailSender>();
         }
     }
 }
