@@ -179,6 +179,7 @@
     </Compile>
     <Compile Include="Infrastructure\HtmlHelpers.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
+    <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\UrlHelpers.cs" />
     <Compile Include="Interfaces\Abstract\ICategoryRepository.cs" />
     <Compile Include="Interfaces\Abstract\ICustomerRepository.cs" />

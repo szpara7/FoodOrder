@@ -15,6 +15,7 @@ namespace FoodOrder
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+            DependencyResolver.SetResolver(new NinjectDependencyResolver());
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
         }
     }

@@ -10,7 +10,7 @@ using System.Web.Security;
 namespace FoodOrder.Infrastructure
 {
     public static class HtmlHelpers
-    {       
+    {
         public static bool UserIsLogged(this HtmlHelper helper)
         {
             return helper.ViewContext.HttpContext.User.Identity.IsAuthenticated;
@@ -18,21 +18,37 @@ namespace FoodOrder.Infrastructure
 
         public static bool UserHasRole(this HtmlHelper helper, params string[] roles)
         {
-            if(!helper.ViewContext.HttpContext.User.Identity.IsAuthenticated)
+            if (!helper.ViewContext.HttpContext.User.Identity.IsAuthenticated)
             {
                 return false;
             }
 
             var currentUser = HttpContext.Current.User.Identity.Name;
-            EmployeeRepository employeeRepository = new EmployeeRepository();
+            EmployeeRepository employeeRepository = new EmployeeRepository();   //todo: zmienic to na DI
             var userRole = employeeRepository.GetAll().Where(t => t.Email == currentUser).Select(t => t.Role.ToString()).FirstOrDefault();
 
-            if(roles.Contains(userRole))
+
+            if (roles.Contains(userRole))
             {
                 return true;
             }
             return false;
         }
-   
+    }
+
+    public class UsersAttributes
+    {
+        private IEmployeeRepository employeeRepository;
+
+        public UsersAttributes(IEmployeeRepository employeeRepository)
+        {
+            this.employeeRepository = employeeRepository;
+        }
+
+        public string EmployeeRole(string username)
+        {
+            return employeeRepository.GetAll().Where(t => t.Email == username).Select(t => t.Role.ToString()).FirstOrDefault();
+        }
+
     }
 }
