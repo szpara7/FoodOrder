@@ -38,6 +38,9 @@ namespace FoodOrder.DAL
         [DefaultValue(false)]
         public bool IsDeleted { get; set; }
 
+        [DefaultValue(false)]
+        public bool IsConfirmed { get; set; }
+
         public virtual ICollection<Order> Orders { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }
