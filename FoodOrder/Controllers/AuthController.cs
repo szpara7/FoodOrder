@@ -46,7 +46,7 @@ namespace FoodOrder.Controllers
             {
                 return View(model);
             }
-            var pas = Crypto.HashPassword("12345");
+
             var isCustomerEmail = customerRepository.GetAll().Any(t => t.EMail == model.Email);
             var isEmployeeEmail = employeeRepository.GetAll().Any(t => t.Email == model.Email);
 
@@ -56,7 +56,7 @@ namespace FoodOrder.Controllers
                 return View(model);
             }
 
-            
+
 
             if (isCustomerEmail == true)
             {
@@ -68,7 +68,7 @@ namespace FoodOrder.Controllers
                 }
 
                 var customerIsConfirmed = customerRepository.GetAll().Where(t => t.EMail == model.Email).Select(t => t.IsConfirmed).FirstOrDefault();
-                if(customerIsConfirmed == false)
+                if (customerIsConfirmed == false)
                 {
                     TempData["EmailNotConfirmed"] = "E-mail wasn't confirmed!";
                     return View();
@@ -84,9 +84,9 @@ namespace FoodOrder.Controllers
                     TempData["PasswordNotExist"] = "Wrong password";
                     return View(model);
                 }
-                
+
                 FormsAuthentication.SetAuthCookie(model.Email, model.RemeberMe);
-            }         
+            }
 
             return RedirectToAction("Index", "Home");
         }
@@ -130,7 +130,7 @@ namespace FoodOrder.Controllers
 
             var hashPassword = Crypto.HashPassword(model.Password);
             var token = Guid.NewGuid().ToString();
-            
+
             customerRepository.Add(new Customer
             {
                 FirstName = model.FirstName,
@@ -155,13 +155,13 @@ namespace FoodOrder.Controllers
         public ActionResult ConfirmEmail(string token, string email)
         {
             Customer customer = customerRepository.GetAll().Where(t => t.Token == token).FirstOrDefault();
-            if(customer == null)
+            if (customer == null)
             {
                 TempData["TokenError"] = "Wrong link";
                 return View();
             }
 
-            if(customer.EMail != email)
+            if (customer.EMail != email)
             {
                 TempData["TokenError"] = "Wrong link";
                 return View();
@@ -175,6 +175,63 @@ namespace FoodOrder.Controllers
             TempData["IsConfirmed"] = "Your e-mail was confirmed.\nYou can log in.";
 
             return View();
+        }
+
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            model.Email = HttpContext.User.Identity.Name;
+
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (employeeRepository.GetAll().Any(t => t.Email == model.Email))
+            {
+                Employee employee = employeeRepository.GetAll().Where(t => t.Email == model.Email).FirstOrDefault();
+                if (!Crypto.VerifyHashedPassword(employee.HashPassword, model.OldPassword))
+                {
+                    TempData["WrongOldPassword"] = "Old password is wrong";
+                    return View(model);
+                }
+
+                if(model.NewPassword != model.NewPassword2)
+                {
+                    TempData["NewPasswordsDiffrence"] = "The new passwords are diffrence";
+                    return View(model);
+                }
+
+                employee.HashPassword = Crypto.HashPassword(model.NewPassword);
+
+                employeeRepository.Edit(employee);
+            }
+            else
+            {
+                Customer customer = customerRepository.GetAll().Where(t => t.EMail == model.Email).FirstOrDefault();
+                if(!Crypto.VerifyHashedPassword(customer.HashPassword, model.OldPassword))
+                {
+                    TempData["WrongOldPassword"] = "Old password is wrong";
+                    return View(model);
+                }
+
+                if(model.NewPassword != model.NewPassword2)
+                {
+                    TempData["NewPasswordsDiffrence"] = "The new passwords are diffrence";
+                    return View(model);
+                }
+
+                customer.HashPassword = Crypto.HashPassword(model.NewPassword);
+
+                customerRepository.Edit(customer);
+            }
+
+            return View("PasswordChanged");
         }
     }
 }

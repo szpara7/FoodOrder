@@ -22,12 +22,31 @@ else
         <ul class="dropdown-menu">
             <li>
                 <a href="@Url.Action("LogOut","Auth")">
-                    <input type="submit" class="btn btn-block" value="Log out"/>
+                    <input type="submit" class="btn btn-block" value="Log out" />
                 </a>
-                <a href="#">
-                    <input type="submit" class="btn btn-block" value="Edit"/>
+            </li>
+            <li class="dropdown-menu-left dropdown-submenu">
+                <a class="test" href="#">
+                    <input type="submit" class="btn btn-block" value="Edit" />
                 </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="@Url.Action("ChangePassword","Auth")">
+                            <input type="submit" class="btn btn-block" value="ChangePassword" />
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
 }
+
+<script>
+$(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+</script>
