@@ -35,6 +35,12 @@ namespace FoodOrder.DAL
         [Required]
         public string HashPassword { get; set; }
 
+        [Required]
+        public DateTime CreatedDate { get; set; }
+
+        [Required]
+        public string Token { get; set; }
+
         [DefaultValue(false)]
         public bool IsDeleted { get; set; }
 

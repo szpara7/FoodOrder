@@ -1,4 +1,5 @@
 ﻿using FoodOrder.DAL;
+using FoodOrder.Infrastructure;
 using FoodOrder.Interfaces;
 using FoodOrder.Interfaces.Abstract;
 using FoodOrder.ViewModel.Auth;
@@ -55,6 +56,8 @@ namespace FoodOrder.Controllers
                 return View(model);
             }
 
+            
+
             if (isCustomerEmail == true)
             {
                 var customerPassword = customerRepository.GetAll().Where(t => t.EMail == model.Email).Select(t => t.HashPassword).FirstOrDefault();
@@ -62,6 +65,13 @@ namespace FoodOrder.Controllers
                 {
                     TempData["PasswordNotExist"] = "Wrong password";
                     return View(model);
+                }
+
+                var customerIsConfirmed = customerRepository.GetAll().Where(t => t.EMail == model.Email).Select(t => t.IsConfirmed).FirstOrDefault();
+                if(customerIsConfirmed == false)
+                {
+                    TempData["EmailNotConfirmed"] = "E-mail wasn't confirmed!";
+                    return View();
                 }
 
                 FormsAuthentication.SetAuthCookie(model.Email, model.RemeberMe);
@@ -76,7 +86,7 @@ namespace FoodOrder.Controllers
                 }
                 
                 FormsAuthentication.SetAuthCookie(model.Email, model.RemeberMe);
-            }
+            }         
 
             return RedirectToAction("Index", "Home");
         }
@@ -119,7 +129,8 @@ namespace FoodOrder.Controllers
             }
 
             var hashPassword = Crypto.HashPassword(model.Password);
-
+            var token = Guid.NewGuid().ToString();
+            
             customerRepository.Add(new Customer
             {
                 FirstName = model.FirstName,
@@ -130,10 +141,40 @@ namespace FoodOrder.Controllers
                 Phone = model.Phone,
                 EMail = model.Email,
                 HashPassword = hashPassword,
-                IsDeleted = false
+                CreatedDate = DateTime.Now,
+                Token = token,
+                IsDeleted = false,
+                IsConfirmed = false
             });
 
-            return RedirectToAction("Index", "Home"); //przekierowanie do view o potwierdzeniu meila
+            emailSender.SendEmail(model.Email, "Confirm password", EmailsBody.ConfirmEmail(model.FirstName, token, model.Email));
+
+            return View("ConfirmYourEmail"); //przekierowanie do view o potwierdzeniu meila
+        }
+
+        public ActionResult ConfirmEmail(string token, string email)
+        {
+            Customer customer = customerRepository.GetAll().Where(t => t.Token == token).FirstOrDefault();
+            if(customer == null)
+            {
+                TempData["TokenError"] = "Wrong link";
+                return View();
+            }
+
+            if(customer.EMail != email)
+            {
+                TempData["TokenError"] = "Wrong link";
+                return View();
+            }
+
+            customer.Token = Guid.NewGuid().ToString();
+            customer.IsConfirmed = true;
+
+            customerRepository.Edit(customer);
+
+            TempData["IsConfirmed"] = "Your e-mail was confirmed.\nYou can log in.";
+
+            return View();
         }
     }
 }
