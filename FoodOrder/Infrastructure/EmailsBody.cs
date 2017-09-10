@@ -21,5 +21,17 @@ namespace FoodOrder.Infrastructure
 
             return body.ToString();
         }
+
+        public static string RecoverPassword(string userName, string userToken, string userEmail)
+        {
+            StringBuilder body = new StringBuilder();
+            body.Append("Welcome " + userName + "!.");
+            body.AppendLine();
+            body.Append("Please click link and set new password.");
+            body.AppendLine();
+            body.Append("http://localhost:51899/Auth/SetNewPassword?token=" + userToken + "&email=" + userEmail);
+
+            return body.ToString();
+        }
     }
 }

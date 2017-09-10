@@ -30,6 +30,8 @@ namespace FoodOrder.DAL
 
         public Role Role { get; set; }
 
+        public string Token { get; set; }
+
         [DefaultValue(false)]
         public bool IsDeleted { get; set; }
 
