@@ -161,6 +161,7 @@
     <Compile Include="Abstract\ProductRepository.cs" />
     <Compile Include="Abstract\ReviewRepository.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountManageController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -200,11 +201,11 @@
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\EmailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\Auth\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModel\AccountManage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\Auth\LoginViewModel.cs" />
-    <Compile Include="ViewModel\Auth\PasswordRecoveryViewModel.cs" />
+    <Compile Include="ViewModel\AccountManage\PasswordRecoveryViewModel.cs" />
     <Compile Include="ViewModel\Auth\RegisterViewModel.cs" />
-    <Compile Include="ViewModel\Auth\SetNewPasswordsViewModel.cs" />
+    <Compile Include="ViewModel\AccountManage\SetNewPasswordsViewModel.cs" />
     <Compile Include="ViewModel\Cart\CartViewModel.cs" />
     <Compile Include="ViewModel\Home\HomeIndexViewModel.cs" />
     <Compile Include="ViewModel\Home\MostOrdersViewModel.cs" />
@@ -230,7 +231,6 @@
     <Content Include="Views\Auth\Index.cshtml" />
     <Content Include="Views\Auth\ConfirmEmail.cshtml" />
     <Content Include="Views\Auth\ConfirmYourEmail.cshtml" />
-    <Content Include="Views\Auth\ChangePassword.cshtml" />
     <Content Include="Views\Auth\PasswordChanged.cshtml" />
     <Content Include="Views\Auth\PasswordRecovery.cshtml" />
     <Content Include="Views\Auth\SetNewPassword.cshtml" />
@@ -249,7 +249,9 @@
       <DependentUpon>201708091330123_add fields %27IsDeleted,...%27.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\AccountManage\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
