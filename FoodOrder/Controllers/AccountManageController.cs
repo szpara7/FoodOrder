@@ -6,6 +6,7 @@ using FoodOrder.ViewModel.AccountManage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -207,6 +208,89 @@ namespace FoodOrder.Controllers
             }
 
             TempData["SetPasswordSuccess"] = "Your password was changed.\nNow you can log in.";
+            return View("Success");
+        }
+
+        public ActionResult EditPersonalData()
+        {
+            string currentUser = HttpContext.User.Identity.Name;
+
+            var customer = customerRepository.GetAll().Where(t => t.EMail == currentUser).FirstOrDefault();
+            
+            if(customer != null)
+            {
+                var model = new EditPersonalDataViewModel()
+                {
+                    UserID = customer.CustomerID,
+                    FirstName = customer.FirstName,
+                    LastName = customer.LastName,
+                    City = customer.City,
+                    Street = customer.Street,
+                    Email = customer.EMail,
+                    Phone = customer.Phone,
+                    PostCode = customer.PostCode
+                };
+
+                return View(model);
+            }
+            else
+            {
+                var employee = employeeRepository.GetAll().Where(t => t.Email == currentUser).FirstOrDefault();
+
+                var model = new EditPersonalDataViewModel()
+                {
+                    UserID = employee.EmployeeID,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    City = employee.City,
+                    Street = employee.Street,
+                    Email = employee.Email,
+                    Phone = employee.Phone,
+                    PostCode = employee.PostCode
+                };
+
+                return View(model);
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
+        [HttpPost]
+        public ActionResult EditPersonalData(EditPersonalDataViewModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var customer = customerRepository.GetAll().Where(t => t.EMail == model.Email).FirstOrDefault();
+
+            if(customer != null)
+            {
+                customer.FirstName = model.FirstName;
+                customer.LastName = model.LastName;
+                customer.City = model.City;
+                customer.Street = model.Street;
+                customer.PostCode = model.PostCode;
+                customer.Phone = model.Phone;
+
+                customerRepository.Edit(customer);
+            }
+            else
+            {
+                var employee = employeeRepository.GetAll().Where(t => t.Email == model.Email).FirstOrDefault();
+
+                employee.FirstName = model.FirstName;
+                employee.LastName = model.LastName;
+                employee.City = model.City;
+                employee.Street = model.Street;
+                employee.PostCode = model.PostCode;
+                employee.Phone = model.Phone;
+
+                employeeRepository.Edit(employee);
+            }
+
+            TempData["PersonalData"] = "Personal data was changed";
             return View("Success");
         }
     }

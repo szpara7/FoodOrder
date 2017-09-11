@@ -1,0 +1,45 @@
+﻿@model FoodOrder.ViewModel.AccountManage.EditPersonalDataViewModel
+@{
+    ViewBag.Title = "EditPersonalData";
+}
+
+<div class="well well-lg">
+    <h3>Change data</h3>
+
+    @using (Html.BeginForm("EditPersonalData", "AccountManage"))
+    {
+        @Html.Label("First Name")
+        @Html.TextBoxFor(t => t.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(t => t.FirstName, String.Empty, new { @style = "color:red" })
+
+
+        @Html.Label("Last Name")
+        @Html.TextBoxFor(t => t.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(t => t.LastName, String.Empty, new { @style = "color:red" })
+
+
+        @Html.Label("City")
+        @Html.TextBoxFor(t => t.City, new { @class = "form-control" })
+        @Html.ValidationMessageFor(t => t.City, String.Empty, new { @style = "color:red" })
+
+
+        @Html.Label("Street")
+        @Html.TextBoxFor(t => t.Street, new { @class = "form-control" })
+        @Html.ValidationMessageFor(t => t.Street, String.Empty, new { @style = "color:red" })
+
+
+        @Html.Label("Post code")
+        @Html.TextBoxFor(t => t.PostCode, new { @class = "form-control" })
+
+        @Html.Label("Phone")
+        @Html.TextBoxFor(t => t.Phone, new { @class = "form-control", @type = "tel" })
+        @Html.ValidationMessageFor(t => t.Phone, String.Empty, new { @style = "color:red" })
+
+        
+        @Html.HiddenFor(t => t.Email)
+        <br />
+        <input type="submit" class="btn btn-primary" value="Save"/>
+    }
+
+</div>
+

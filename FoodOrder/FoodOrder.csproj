@@ -202,6 +202,7 @@
     <Compile Include="Models\EmailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AccountManage\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModel\AccountManage\EditPersonalDataViewModel.cs" />
     <Compile Include="ViewModel\Auth\LoginViewModel.cs" />
     <Compile Include="ViewModel\AccountManage\PasswordRecoveryViewModel.cs" />
     <Compile Include="ViewModel\Auth\RegisterViewModel.cs" />
@@ -238,6 +239,7 @@
     <Content Include="Views\Shared\Success.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\AccountManage\PasswordRecoveryStatement.cshtml" />
+    <Content Include="Views\AccountManage\EditPersonalData.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
