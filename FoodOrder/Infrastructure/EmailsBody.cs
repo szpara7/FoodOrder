@@ -29,7 +29,7 @@ namespace FoodOrder.Infrastructure
             body.AppendLine();
             body.Append("Please click link and set new password.");
             body.AppendLine();
-            body.Append("http://localhost:51899/Auth/SetNewPassword?token=" + userToken + "&email=" + userEmail);
+            body.Append("http://localhost:51899/AccountManage/SetNewPassword?token=" + userToken + "&email=" + userEmail);
 
             return body.ToString();
         }
