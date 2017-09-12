@@ -25,16 +25,29 @@ namespace FoodOrder.DAL
 
         [Required,StringLength(6)]
         public string ShipPostCode { get; set; }
+        
+        [Required]
+        public PaymentMethod PaymentMethod { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsCanceled { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsCompleted { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsPaid { get; set; }
 
         public virtual Customer Customer { get; set; }
 
         public virtual Employee Employee { get; set; }
 
-        [DefaultValue(false)]
-        public bool IsCanceled { get; set; }
-
         public virtual ICollection<OrderLine> OrderLines { get; set; }
+     
+    }
 
-        
+    public enum PaymentMethod
+    {
+        CashOnDelivery
     }
 }
