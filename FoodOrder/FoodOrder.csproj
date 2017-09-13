@@ -134,6 +134,7 @@
     <Content Include="Images\Category\PIZZA\wloska.jpg" />
     <Content Include="Images\logo.png" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Images\noPermission.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -179,6 +180,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\AuthAttribute.cs" />
     <Compile Include="Infrastructure\EmailsBody.cs" />
     <Compile Include="Infrastructure\HtmlHelpers.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
@@ -241,6 +243,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\AccountManage\PasswordRecoveryStatement.cshtml" />
     <Content Include="Views\AccountManage\EditPersonalData.cshtml" />
+    <Content Include="Views\Shared\NoPermission.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

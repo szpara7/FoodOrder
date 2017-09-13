@@ -6,6 +6,8 @@ using FoodOrder.ViewModel.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -74,7 +76,12 @@ namespace FoodOrder.Controllers
                     return View();
                 }
 
+                HttpCookie userRoleCookie = new HttpCookie("UserRole", "Customer");
+                userRoleCookie.Expires.AddMinutes(10);
+                Response.Cookies.Add(userRoleCookie);
+
                 FormsAuthentication.SetAuthCookie(model.Email, model.RemeberMe);
+
             }
             else
             {
@@ -84,6 +91,13 @@ namespace FoodOrder.Controllers
                     TempData["PasswordNotExist"] = "Wrong password";
                     return View(model);
                 }
+
+                string role = employeeRepository.GetAll()
+                    .Where(t => t.Email == model.Email).Select(t => t.Role.ToString()).FirstOrDefault();
+
+                HttpCookie userRoleCookie = new HttpCookie("UserRole", role);
+                userRoleCookie.Expires.AddMinutes(10);
+                Response.Cookies.Add(userRoleCookie);
 
                 FormsAuthentication.SetAuthCookie(model.Email, model.RemeberMe);
             }
@@ -95,9 +109,13 @@ namespace FoodOrder.Controllers
         {
             FormsAuthentication.SignOut();
 
-            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, "");
+            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, ""); //usuwam cookie z przeglądarki
             cookie.Expires = DateTime.Now.AddYears(-1);
             Response.Cookies.Add(cookie);
+
+            HttpCookie userRoleCookie = new HttpCookie("UserRole");
+            userRoleCookie.Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies.Add(userRoleCookie);
 
             return RedirectToAction("Index", "Home");
         }

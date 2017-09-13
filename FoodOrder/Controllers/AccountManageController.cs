@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace FoodOrder.Controllers
 {
+    
     public class AccountManageController : Controller
     {
         private IEmployeeRepository employeeRepository;
@@ -26,6 +27,7 @@ namespace FoodOrder.Controllers
             this.emailSender = emailSender;
         }
 
+        [Authorize]
         // GET: AccountManage
         public ActionResult ChangePassword()
         {
@@ -211,6 +213,7 @@ namespace FoodOrder.Controllers
             return View("Success");
         }
 
+        [CustomAuthorize]
         public ActionResult EditPersonalData()
         {
             string currentUser = HttpContext.User.Identity.Name;

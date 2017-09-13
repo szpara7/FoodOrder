@@ -13,7 +13,7 @@ namespace FoodOrder.Controllers
         // GET: OrderManage
         public ActionResult OrderDetails()
         {
-
+            
 
             return View();
         }
