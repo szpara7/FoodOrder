@@ -18,17 +18,21 @@ namespace FoodOrder.Infrastructure
                 return false;
             }
 
-            if(Roles == String.Empty || Users == String.Empty)
+            if (Roles == String.Empty)
             {
                 return true;
             }
-            
-            var role = HttpContext.Current.Request.Cookies["UserRole"].Value;
-            if (role != null)
+
+            var userRole = HttpContext.Current.Request.Cookies["UserRole"].Value;
+            var roles = Roles.Split(',');
+            if (userRole != null)
             {
-                if (Roles == role)
+                foreach (var i in roles)
                 {
-                    return true;
+                    if (i.Trim() == userRole)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;

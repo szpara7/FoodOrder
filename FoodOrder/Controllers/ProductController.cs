@@ -14,10 +14,13 @@ namespace FoodOrder.Controllers
     {
         private IProductRepository productRepository;
         private IPriceRepository priceRepository;
-        public ProductController(IProductRepository productRepository, IPriceRepository priceRepository)
+        private IReviewRepository reviewRepository;
+        public ProductController(IProductRepository productRepository, IPriceRepository priceRepository,
+            IReviewRepository reviewRepository)
         {
             this.productRepository = productRepository;
             this.priceRepository = priceRepository;
+            this.reviewRepository = reviewRepository;
         }
         // GET: ProductDetails
         public ActionResult ProductsList(string categoryName)

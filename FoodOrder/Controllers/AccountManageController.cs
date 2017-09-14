@@ -27,7 +27,7 @@ namespace FoodOrder.Controllers
             this.emailSender = emailSender;
         }
 
-        [CustomAuthorize]
+        [CustomAuthorize(Roles ="Seller, Cook")]
         // GET: AccountManage
         public ActionResult ChangePassword()
         {
