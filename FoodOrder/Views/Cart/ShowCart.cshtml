@@ -9,6 +9,12 @@
     <table class="table table-condensed" id="tableBodyShowCart">
         @Html.Action("ShowCartDataTable", "Cart")
     </table>
+
+    <div>
+        <a href="@Url.Action("OrderDetails","OrderManage")">
+            <input type="submit" class="btn btn-primary" value="Checkout" />
+        </a>
+    </div>
 </div>
 
 

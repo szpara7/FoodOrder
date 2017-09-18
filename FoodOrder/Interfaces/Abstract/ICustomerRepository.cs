@@ -9,5 +9,6 @@ namespace FoodOrder.Interfaces.Abstract
 {
     public interface ICustomerRepository : IRepository<Customer>
     {
+        Customer GetByEmail(string customerEmail);
     }
 }

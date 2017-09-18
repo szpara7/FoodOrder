@@ -1,0 +1,144 @@
+﻿@model FoodOrder.ViewModel.OrderManage.OrderDetailsViewModel
+@{
+    ViewBag.Title = "OrderDetails";
+}
+
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+
+<div class="well well-lg">
+    @using (Html.BeginForm("OrderDetails", "OrderManage"))
+    {
+        <div>
+            @Html.Label("Delivery method")
+            @Html.EnumDropDownListFor(t => t.DeliveryMethod, "--Select--", new { @class = "form-control", @id = "deliveryMethodId" })
+            @Html.ValidationMessageFor(t => t.DeliveryMethod, String.Empty, new { @style = "color:red" })
+            <span style="color:red" id="deliveryVal"></span>
+
+            @Html.Label("Payment method")
+            @Html.EnumDropDownListFor(t => t.PaymentMethod, "--Select--", new { @class = "form-control", @id = "paymentMethodId" })
+            @Html.ValidationMessageFor(t => t.PaymentMethod, String.Empty, new { @style = "color:red" })
+            <span style="color:red" id="paymentVal"></span>
+
+            @Html.Label("Phone")
+            @Html.TextBoxFor(t => t.Phone, new { @class = "form-control", @id = "phone" } )
+            @Html.ValidationMessageFor(t => t.Phone, String.Empty, new { @style = "color:red" })
+            <span style="color:red" id="phoneVal"></span>
+        </div>
+
+        <div id="additionalDetails" style="display:none">
+            @Html.Label("First name")
+            @Html.TextBoxFor(t => t.CustomerFirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(t => t.CustomerFirstName, String.Empty, new { @style = "color:red" })
+
+            @Html.Label("Last name")
+            @Html.TextBoxFor(t => t.CustomerLastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(t => t.CustomerLastName, String.Empty, new { @style = "color:red" })
+
+            <text>Ship address</text>
+            @Html.Label("City")
+            @Html.TextBoxFor(t => t.ShipCity, new { @class = "form-control" })
+            @Html.ValidationMessageFor(t => t.ShipCity, String.Empty, new { @style = "color:red" })
+
+            @Html.Label("Street")
+            @Html.TextBoxFor(t => t.ShipStreet, new { @class = "form-control" })
+            @Html.ValidationMessageFor(t => t.ShipStreet, String.Empty, new { @style = "color:red" })
+
+            @Html.Label("Post code")
+            @Html.TextBoxFor(t => t.PostCode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(t => t.PostCode, String.Empty, new { @style = "color:red" })
+
+            @for (int i = 0; i < Model.CartLines.Count; i++)
+            {
+                @Html.HiddenFor(t => t.CartLines[i].Price)
+                @Html.HiddenFor(t => t.CartLines[i].ProductId)
+                @Html.HiddenFor(t => t.CartLines[i].Quantity)
+            }
+
+            @Html.HiddenFor(t => t.CustomerId)
+            @Html.HiddenFor(t => t.Value)
+
+        </div>
+
+        <br />
+        <h2>Total value: @Model.Value</h2>
+
+        <br />
+        <input type="submit" class="btn btn-danger" value="Save" id="submitButton" />
+    }
+
+    <p id="asd"></p>
+</div>
+
+
+
+<script>
+
+    function additionalDetailsToggle(target) {
+
+        var value = $(target).val();
+        var toggle = $("#additionalDetails");
+
+        if (value == 2 || value == 0) {
+            toggle.hide();
+        }
+        else {
+            toggle.show();
+        }
+
+    }
+
+    function validation(e)
+    {
+        var btn = $("#submitButton");
+
+        var deliveryMethod = $("#deliveryMethodId");
+        var paymentMethod = $("#paymentMethodId");
+        var phone = $("#phone");
+
+        var deliveryVal = $("#deliveryVal");
+        var paymentVal = $("#paymentVal");
+        var phoneVal = $("#phoneVal");
+        
+        btn.click(function (e) {
+            
+            if(deliveryMethod.val() == 0) {
+                e.preventDefault();
+                deliveryVal.text("This field is required");
+            }
+            else {
+                deliveryVal.text("");
+            }
+
+            if(paymentMethod.val() == 0) {
+                e.preventDefault();
+                paymentVal.text("This field is required");
+            }
+            else {
+                paymentVal.text("");
+            }
+
+            if (phone.val() == "") {
+                e.preventDefault();
+                phoneVal.text("This field is required");
+            }
+            else {
+                phoneVal.text("");
+            }
+        });
+    }
+
+
+
+
+    $(document).ready(function () {
+
+        var target = $("#deliveryMethodId");
+
+        target.click(function () {
+            additionalDetailsToggle(target);
+        });
+
+        validation();
+    });
+
+</script>

@@ -17,6 +17,10 @@
         <a href="@Url.Action("ProductDetails","Product",new { productId = @i.ProductID})">
             <input type="submit" class="btn btn-default btn-lg" value="Show details" />
         </a>
+        @Ajax.ActionLink("Add to cart", "AddtoCart", "Cart", new { productId = @i.ProductID }, new AjaxOptions
+    {
+        UpdateTargetId = "shoppingCart"
+    }, new { @class = "top-right btn btn-danger btn-lg" })
     </div>
 }
 <br />
@@ -29,5 +33,9 @@
         <a href="@Url.Action("ProductDetails","Product",new { productId = @i.ProductID})">
             <input type="submit" class="btn btn-default btn-lg" value="Show details" />
         </a>
+        @Ajax.ActionLink("Add to cart", "AddtoCart", "Cart", new { productId = @i.ProductID }, new AjaxOptions
+     {
+         UpdateTargetId = "shoppingCart"
+     }, new { @class = "top-right btn btn-danger btn-lg" })
     </div>
 }

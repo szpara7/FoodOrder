@@ -1,7 +1,12 @@
-﻿using FoodOrder.Interfaces.Abstract;
+﻿using FoodOrder.DAL;
+using FoodOrder.Infrastructure;
+using FoodOrder.Interfaces.Abstract;
+using FoodOrder.Models;
+using FoodOrder.ViewModel.OrderManage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,13 +14,127 @@ namespace FoodOrder.Controllers
 {
     public class OrderManageController : Controller
     {
-       
-        // GET: OrderManage
+        private ICustomerRepository customerRepository;
+        private IOrderRepository orderRepository;
+        private IOrderLineRepository orderLineRepository;
+
+        public OrderManageController(ICustomerRepository customerRepository, IOrderRepository orderRepository,
+            IOrderLineRepository orderLineRepository)
+        {
+            this.customerRepository = customerRepository;
+            this.orderRepository = orderRepository;
+            this.orderLineRepository = orderLineRepository;
+        }
+
+
+        //[CustomAuthorize(Roles = "Customer")]
         public ActionResult OrderDetails()
         {
-            
+            //string currentUserName = HttpContext.User.Identity.Name;
+            var currentUserName = "foodorder@interia.pl";
+            Customer customer = customerRepository.GetByEmail(currentUserName);
 
-            return View();
+            if (customer == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Cart cart = (Cart)Session["Cart"];
+            if (cart == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            decimal cartValue = cart.TotalValue();
+
+            List<OrderLineViewModel> cartLines = new List<OrderLineViewModel>();
+            foreach (var i in cart.Lines)
+            {
+                cartLines.Add(new OrderLineViewModel
+                {
+                    ProductId = i.Product.ProductID,
+                    Quantity = i.Quantity,
+                    Price = i.Price
+                });
+            }
+
+            var model = new OrderDetailsViewModel()
+            {
+                CustomerId = customer.CustomerID,
+                CustomerFirstName = customer.FirstName,
+                CustomerLastName = customer.LastName,
+                ShipCity = customer.City,
+                ShipStreet = customer.Street,
+                PostCode = customer.PostCode,
+                Phone = customer.Phone,
+                Value = cartValue,
+                CartLines = cartLines
+            };
+
+            return View(model);
         }
+
+        [HttpPost]
+        public ActionResult OrderDetails(OrderDetailsViewModel model)
+        {
+            int orderId;
+
+            if (model.DeliveryMethod != DeliveryMethod.SelfPickup)
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                var order = new Order
+                {
+                    CustomerId = model.CustomerId,
+                    DeliveryMethod = model.DeliveryMethod,
+                    OrderDate = DateTime.Now,
+                    PaymentMethod = model.PaymentMethod,
+                    ShipCity = model.ShipCity,
+                    ShipStreet = model.ShipStreet,
+                    ShipPostCode = model.PostCode,
+                    Value = model.Value
+                };
+
+                orderRepository.Add(order);
+
+                orderId = order.OrderID;
+            }
+            else
+            {
+                var order = new Order
+                {
+                    CustomerId = model.CustomerId,
+                    DeliveryMethod = model.DeliveryMethod,
+                    OrderDate = DateTime.Now,
+                    PaymentMethod = model.PaymentMethod,
+                    ShipCity = "-",
+                    ShipStreet = "-",
+                    ShipPostCode = "-",
+                    Value = model.Value
+                };
+
+                orderRepository.Add(order);
+
+                orderId = order.OrderID;
+            }
+
+            foreach (var i in model.CartLines)
+            {
+                orderLineRepository.Add(new OrderLine
+                {
+                    ProductId = i.ProductId,
+                    Quantity = i.Quantity,
+                    OrderId = orderId,
+                    Value = i.Price * i.Quantity
+                });
+            }
+
+            return View("Success");
+
+        }
+
     }
 }

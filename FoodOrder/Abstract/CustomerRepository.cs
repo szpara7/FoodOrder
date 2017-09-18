@@ -42,5 +42,10 @@ namespace FoodOrder.Abstract
             context.SaveChanges();
             return true;
         }
+
+        public Customer GetByEmail(string customerEmail)
+        {
+            return context.Customers.Where(t => t.EMail == customerEmail).FirstOrDefault();
+        }
     }
 }

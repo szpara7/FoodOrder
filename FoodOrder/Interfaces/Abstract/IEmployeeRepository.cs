@@ -9,6 +9,6 @@ namespace FoodOrder.Interfaces.Abstract
 {
     public interface IEmployeeRepository : IRepository<Employee>
     {
-
+        Employee GetByEmail(string employeeEmail);
     }
 }

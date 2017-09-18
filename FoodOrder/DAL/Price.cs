@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodOrder.DAL
 {
@@ -21,6 +22,9 @@ namespace FoodOrder.DAL
 
         [DefaultValue(false)]
         public bool IsDeleted { get; set; }
+
+        [ForeignKey("Product")]
+        public int ProductId { get; set; }
 
         public virtual Product Product{ get; set; }
     }

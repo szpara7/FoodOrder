@@ -42,5 +42,10 @@ namespace FoodOrder.Abstract
             context.SaveChanges();
             return true;
         }
+
+        public Employee GetByEmail(string employeeEmail)
+        {
+            return context.Employees.Where(t => t.Email == employeeEmail).FirstOrDefault();
+        }
     }
 }

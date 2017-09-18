@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodOrder.DAL
 {
@@ -23,6 +24,9 @@ namespace FoodOrder.DAL
         public string ImageName { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
 

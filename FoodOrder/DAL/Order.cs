@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodOrder.DAL
 {
@@ -29,6 +30,9 @@ namespace FoodOrder.DAL
         [Required]
         public PaymentMethod PaymentMethod { get; set; }
 
+        [Required]
+        public DeliveryMethod DeliveryMethod { get; set; }
+
         [DefaultValue(false)]
         public bool IsCanceled { get; set; }
 
@@ -38,7 +42,13 @@ namespace FoodOrder.DAL
         [DefaultValue(false)]
         public bool IsPaid { get; set; }
 
+        [ForeignKey("Customer")]
+        public int CustomerId { get; set; }
+
         public virtual Customer Customer { get; set; }
+
+        [ForeignKey("Employee")]
+        public int? EmployeeId { get; set; }
 
         public virtual Employee Employee { get; set; }
 
@@ -48,6 +58,16 @@ namespace FoodOrder.DAL
 
     public enum PaymentMethod
     {
-        CashOnDelivery
+        [Display(Name = "Cash on delivery")]
+        CashOnDelivery = 1
+    }
+
+    public enum DeliveryMethod
+    {
+        [Display(Name = "Home delivery")]
+        HomeDelivery = 1,
+
+        [Display(Name = "Self-pickup delivery")]
+        SelfPickup
     }
 }
