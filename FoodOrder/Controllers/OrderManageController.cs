@@ -27,11 +27,11 @@ namespace FoodOrder.Controllers
         }
 
 
-        //[CustomAuthorize(Roles = "Customer")]
+        [CustomAuthorize(Roles = "Customer")]
         public ActionResult OrderDetails()
         {
-            //string currentUserName = HttpContext.User.Identity.Name;
-            var currentUserName = "foodorder@interia.pl";
+            string currentUserName = HttpContext.User.Identity.Name;
+          
             Customer customer = customerRepository.GetByEmail(currentUserName);
 
             if (customer == null)
@@ -54,7 +54,8 @@ namespace FoodOrder.Controllers
                 {
                     ProductId = i.Product.ProductID,
                     Quantity = i.Quantity,
-                    Price = i.Price
+                    Price = i.Price,
+                    ProductName = i.Product.ProductName
                 });
             }
 
@@ -128,13 +129,43 @@ namespace FoodOrder.Controllers
                     ProductId = i.ProductId,
                     Quantity = i.Quantity,
                     OrderId = orderId,
-                    Value = i.Price * i.Quantity
+                    LineValue = i.Price * i.Quantity,
+                    UnitPrice = i.Price
                 });
             }
 
+            TempData["AddOrderSuccess"] = "Your order is being processed";
             return View("Success");
 
         }
 
+        //[CustomAuthorize(Roles = "Customer")]
+        public ActionResult UserOrders()
+        {
+            //string currentUserName = HttpContext.User.Identity.Name;
+            string currentUserName = "foodorder@interia.pl";
+
+            int customerId = customerRepository.GetByEmail(currentUserName).CustomerID;
+
+            var model = orderRepository.GetAll()
+                .Where(t => t.CustomerId == customerId)
+                .Select(s => new UserOrdersViewModel
+                {
+                    OrderDate = s.OrderDate,
+                    OrderValue = s.Value,
+                    OrderLines = s.OrderLines
+                    .Select(t => new OrderLineViewModel
+                    {
+                        Price = t.UnitPrice,
+                        ProductId = t.ProductId,
+                        ProductName = t.Product.ProductName,
+                        Quantity = t.Quantity
+                    })
+                    .ToList()
+                })
+                .ToList();            
+
+            return View(model);
+        }
     }
 }

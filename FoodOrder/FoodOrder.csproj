@@ -216,6 +216,7 @@
     <Compile Include="ViewModel\Home\TopRatedViewModel.cs" />
     <Compile Include="ViewModel\OrderManage\OrderDetailsViewModel.cs" />
     <Compile Include="ViewModel\OrderManage\OrderLineViewModel.cs" />
+    <Compile Include="ViewModel\OrderManage\UserOrdersViewModel.cs" />
     <Compile Include="ViewModel\Product\ProductDetailViewModel.cs" />
     <Compile Include="ViewModel\Product\ProductsListViewModel.cs" />
     <Compile Include="ViewModel\Product\ReviewViewModel.cs" />
@@ -247,6 +248,7 @@
     <Content Include="Views\AccountManage\EditPersonalData.cshtml" />
     <Content Include="Views\Shared\NoPermission.cshtml" />
     <Content Include="Views\OrderManage\OrderDetails.cshtml" />
+    <Content Include="Views\OrderManage\UserOrders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

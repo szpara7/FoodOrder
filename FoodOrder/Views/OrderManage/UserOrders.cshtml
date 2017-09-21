@@ -1,0 +1,71 @@
+﻿@model  IEnumerable<FoodOrder.ViewModel.OrderManage.UserOrdersViewModel>
+@{
+    ViewBag.Title = "UserOrders";
+}
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<style>
+    .boldFont {
+        font-weight: bold;
+    }
+</style>
+
+<div class="col-lg-12 well well-lg">
+    <h2>Your orders:</h2>
+
+    <div class="parent col-lg-12 panel panel-primary">
+        @foreach (var i in Model)
+        {
+            <br />
+            <div class="sibling col-lg-12 panel panel-heading">
+                <h4 class="col-lg-5">@i.OrderDate</h4>
+                <h4 class="col-lg-5">@i.OrderValue PLN</h4>
+                <button class="btndown btn btn-danger col-lg-1 col-lg-push-1 right"><span class="fa fa-angle-down"></span></button>
+            </div>
+            <div class="orderList col-lg-12 panel panel-body" style="display:none">
+                <h4 class="boldFont col-lg-4">Product name</h4>
+                <h4 class="boldFont col-lg-4">Quantity</h4>
+                <h4 class="boldFont col-lg-4">Unit Price</h4>
+
+                @foreach (var k in i.OrderLines)
+                {
+                <div class="col-lg-12">
+                    <h5 class="boldFont col-lg-4">@k.ProductName</h5>
+                    <h5 class="boldFont col-lg-4">@k.Quantity</h5>
+                    <h5 class="boldFont col-lg-4">@k.Price PLN</h5>
+                </div>
+                }
+                <div class="orderValue col-lg-12 panel panel-body">
+                    <h4 class="boldFont col-lg-offset-7 col-lg-5">Total value: @i.OrderValue PLN</h4>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+
+    function CollapseToggle() {
+        var btn = $(".btndown");
+
+        btn.click(function () {
+
+          
+            $(this).parents(".sibling").next(".orderList").toggle();
+          
+            if ($(this).find("span").hasClass("fa-angle-down")) {
+                $(this).find("span").removeClass("fa-angle-down");
+                $(this).find("span").addClass("fa-angle-up");
+            }
+            else {
+                $(this).find("span").removeClass("fa-angle-up");
+                $(this).find("span").addClass("fa-angle-down");
+            }
+        });
+    }
+
+
+    $(document).ready(function () {
+        CollapseToggle();
+    });
+
+</script>

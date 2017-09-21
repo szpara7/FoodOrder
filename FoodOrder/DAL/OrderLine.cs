@@ -16,7 +16,10 @@ namespace FoodOrder.DAL
         public int Quantity { get; set; }
 
         [Required]
-        public decimal Value { get; set; }
+        public decimal UnitPrice { get; set; }
+
+        [Required]
+        public decimal LineValue { get; set; }
 
         [DefaultValue(false)]
         public bool IsDeleted { get; set; }

@@ -10,7 +10,7 @@ namespace FoodOrder.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationDataLossAllowed = true;            
         }
 
         protected override void Seed(FoodOrder.DAL.DbCtx context)
