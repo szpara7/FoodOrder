@@ -19,17 +19,48 @@ namespace FoodOrder
               defaults: new { controller = "Product", action = "ProductsList" }
               );
 
-
             routes.MapRoute(
                name: "ProductDetails",
                 url: "product-{productId}",
                 defaults: new { controller = "Product", action = "ProductDetails" }
                );
+
+            routes.MapRoute(
+                name: "account2",
+                url: "account/orders",
+                defaults: new { controller = "OrderManage", action = "UserOrders" }
+                );
+
+            routes.MapRoute(
+                name: "cartCheckout",
+                url: "cart/checkout",
+                defaults: new { controller = "OrderManage", action = "OrderDetails" }
+                );
+
+            routes.MapRoute(
+                name: "account",
+                url: "account/{action}",
+                defaults: new { controller = "AccountManage" }
+                );
+
+            routes.MapRoute(
+                name: "cart",
+                url: "cart",
+                defaults: new { controller = "Cart", action = "ShowCart" }
+                );
+
+            routes.MapRoute(
+                name: "auth",
+                url: "auth/{action}",
+                defaults: new { controller = "Auth" }
+                );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
 
                    
         }
