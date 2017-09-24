@@ -139,16 +139,16 @@ namespace FoodOrder.Controllers
 
         }
 
-        //[CustomAuthorize(Roles = "Customer")]
+        [CustomAuthorize(Roles = "Customer")]
         public ActionResult UserOrders()
         {
-            //string currentUserName = HttpContext.User.Identity.Name;
-            string currentUserName = "foodorder@interia.pl";
-
+            string currentUserName = HttpContext.User.Identity.Name;
+            
             int customerId = customerRepository.GetByEmail(currentUserName).CustomerID;
 
             var model = orderRepository.GetAll()
                 .Where(t => t.CustomerId == customerId)
+                .OrderByDescending(t => t.OrderDate)
                 .Select(s => new UserOrdersViewModel
                 {
                     OrderDate = s.OrderDate,
