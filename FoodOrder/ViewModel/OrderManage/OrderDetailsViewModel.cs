@@ -26,6 +26,9 @@ namespace FoodOrder.ViewModel.OrderManage
         public string CustomerLastName { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
+        public string CustomerEmail { get; set; }
+
+        [Required(ErrorMessage = "This field is required")]
         public string ShipCity { get; set; }
 
         [Required(ErrorMessage = "This field is required")]

@@ -25,11 +25,23 @@ namespace FoodOrder.Infrastructure
         public static string RecoverPassword(string userName, string userToken, string userEmail)
         {
             StringBuilder body = new StringBuilder();
-            body.Append("Welcome " + userName + "!.");
+            body.Append("Welcome " + userName + "!");
             body.AppendLine();
             body.Append("Please click link and set new password.");
             body.AppendLine();
             body.Append("http://localhost:51899/AccountManage/SetNewPassword?token=" + userToken + "&email=" + userEmail);
+
+            return body.ToString();
+        }
+
+        public static string SubmitOrder(string userName, string userEmail, decimal totalValue)
+        {
+            StringBuilder body = new StringBuilder();
+            body.Append("Welcome " + userName + "!");
+            body.AppendLine();
+            body.Append("Your order is being processed.");
+            body.AppendLine();
+            body.Append("Order cost: " + totalValue + " PLN.");
 
             return body.ToString();
         }

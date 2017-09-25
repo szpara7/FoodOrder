@@ -1,5 +1,6 @@
 ﻿using FoodOrder.DAL;
 using FoodOrder.Infrastructure;
+using FoodOrder.Interfaces;
 using FoodOrder.Interfaces.Abstract;
 using FoodOrder.Models;
 using FoodOrder.ViewModel.OrderManage;
@@ -17,13 +18,15 @@ namespace FoodOrder.Controllers
         private ICustomerRepository customerRepository;
         private IOrderRepository orderRepository;
         private IOrderLineRepository orderLineRepository;
+        private IEmailSender emailSender;
 
         public OrderManageController(ICustomerRepository customerRepository, IOrderRepository orderRepository,
-            IOrderLineRepository orderLineRepository)
+            IOrderLineRepository orderLineRepository, IEmailSender emailSender)
         {
             this.customerRepository = customerRepository;
             this.orderRepository = orderRepository;
             this.orderLineRepository = orderLineRepository;
+            this.emailSender = emailSender;
         }
 
 
@@ -69,7 +72,8 @@ namespace FoodOrder.Controllers
                 PostCode = customer.PostCode,
                 Phone = customer.Phone,
                 Value = cartValue,
-                CartLines = cartLines
+                CartLines = cartLines,
+                CustomerEmail = customer.EMail
             };
 
             return View(model);
@@ -133,6 +137,9 @@ namespace FoodOrder.Controllers
                     UnitPrice = i.Price
                 });
             }
+
+            emailSender.SendEmail(model.CustomerEmail, "Order",
+                EmailsBody.SubmitOrder(model.CustomerFirstName, model.CustomerEmail, model.Value));            
 
             TempData["AddOrderSuccess"] = "Your order is being processed";
             return View("Success");
