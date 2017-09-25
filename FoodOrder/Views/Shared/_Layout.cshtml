@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Food Order</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
@@ -12,36 +12,39 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <style>
-    
+
     </style>
 </head>
 
 <body>
- 
+
     <div class="navbar navbar-inverse navbar-fixed-top row">
-       <div class="container-fluid">
-           <div class="navbar-header col-lg-12">
-               <div class="col-lg-8">
-                   <a class="navbar-brand" href="@Url.Action("Index","Home")">
-                       FoodOrder
-                   </a>
-               </div>
-               <div class="col-lg-2" id="shoppingCart">
-                   @Html.Action("ShowPartialCart", "Cart")
-               </div>
-               <div class="col-lg-2">
-                   @Html.Action("Index","Auth")
-               </div>
-           </div>
-       </div>
+        <div class="container-fluid">
+            <div class="navbar-header col-lg-12">
+                <div class="col-lg-8">
+                    <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                        FoodOrder
+                    </a>
+                </div>
+                <div class="col-lg-2" id="shoppingCart">
+                    @if (!Html.UserHasRole("Admin"))
+                    {
+                        @Html.Action("ShowPartialCart", "Cart")
+                    }
+                </div>
+                <div class="col-lg-2">
+                    @Html.Action("Index", "Auth")
+                </div>
+            </div>
+        </div>
     </div>
-   
+
     <div class="container-fluid">
         <div class="row content">
-            <div class="col-sm-2 sidenav well well-lg" >
+            <div class="col-sm-2 sidenav well well-lg">
                 <a href="@Url.Action("Index","Home")"><img src="~/Images/logo.png" width="150" height="130" /></a>
                 <h1>Categories</h1>
-              @Html.Action("CategoriesList","Home")
+                @Html.Action("CategoriesList", "Home")
             </div>
 
             <div class="col-sm-9" id="renderBody">
@@ -52,8 +55,8 @@
             </div>
         </div>
     </div>
-  
-       
+
+
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>

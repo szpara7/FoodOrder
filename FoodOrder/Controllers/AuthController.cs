@@ -77,7 +77,7 @@ namespace FoodOrder.Controllers
                 }
 
                 HttpCookie userRoleCookie = new HttpCookie("UserRole", "Customer");
-                userRoleCookie.Expires.AddMinutes(10);
+                userRoleCookie.Expires.AddMinutes(30);
                 Response.Cookies.Add(userRoleCookie);
 
                 FormsAuthentication.SetAuthCookie(model.Email, model.RemeberMe);
@@ -96,7 +96,7 @@ namespace FoodOrder.Controllers
                     .Where(t => t.Email == model.Email).Select(t => t.Role.ToString()).FirstOrDefault();
 
                 HttpCookie userRoleCookie = new HttpCookie("UserRole", role);
-                userRoleCookie.Expires.AddMinutes(10);
+                userRoleCookie.Expires.AddMinutes(30);
                 Response.Cookies.Add(userRoleCookie);
 
                 FormsAuthentication.SetAuthCookie(model.Email, model.RemeberMe);

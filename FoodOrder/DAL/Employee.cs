@@ -57,7 +57,8 @@ namespace FoodOrder.DAL
     {
         Seller = 1,
         Cook,
-        Driver
+        Driver,
+        Admin
     }
 
 }

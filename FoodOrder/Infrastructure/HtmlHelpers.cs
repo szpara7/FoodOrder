@@ -3,6 +3,7 @@ using FoodOrder.Interfaces.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -23,32 +24,21 @@ namespace FoodOrder.Infrastructure
                 return false;
             }
 
-            var currentUser = HttpContext.Current.User.Identity.Name;
-            EmployeeRepository employeeRepository = new EmployeeRepository();   //todo: zmienic to na DI
-            var userRole = employeeRepository.GetAll().Where(t => t.Email == currentUser).Select(t => t.Role.ToString()).FirstOrDefault();
-
-
-            if (roles.Contains(userRole))
+            if (!roles.Any())
             {
                 return true;
             }
+
+            var userRole = HttpContext.Current.Request.Cookies["UserRole"].Value;
+            if (userRole != null)
+            {
+                if (roles.Contains(userRole))
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
-    }
-
-    public class UsersAttributes
-    {
-        private IEmployeeRepository employeeRepository;
-
-        public UsersAttributes(IEmployeeRepository employeeRepository)
-        {
-            this.employeeRepository = employeeRepository;
-        }
-
-        public string EmployeeRole(string username)
-        {
-            return employeeRepository.GetAll().Where(t => t.Email == username).Select(t => t.Role.ToString()).FirstOrDefault();
-        }
-
     }
 }

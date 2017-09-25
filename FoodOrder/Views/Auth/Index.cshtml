@@ -42,21 +42,24 @@ else
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="@Url.Action("UserOrders", "OrderManage")">
-                    <input type="submit" class="btn btn-block" value="Orders" />
-                </a>
-            </li>
+            @if (Html.UserHasRole("Customer"))
+            {
+                <li>
+                    <a href="@Url.Action("UserOrders", "OrderManage")">
+                        <input type="submit" class="btn btn-block" value="Orders" />
+                    </a>
+                </li>
+            }
         </ul>
     </div>
 }
 
 <script>
-$(document).ready(function(){
-  $('.dropdown-submenu a.test').on("click", function(e){
-    $(this).next('ul').toggle();
-    e.stopPropagation();
-    e.preventDefault();
-  });
-});
+    $(document).ready(function () {
+        $('.dropdown-submenu a.test').on("click", function (e) {
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    });
 </script>
