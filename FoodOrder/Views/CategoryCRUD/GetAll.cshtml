@@ -1,0 +1,32 @@
+﻿@model IEnumerable<FoodOrder.ViewModel.CRUD.CategoryCRUDViewModel>
+@{
+    Layout = null;
+}
+
+@foreach (var i in Model)
+{
+    <tr>
+        <td class="categoryId">@i.CategoryId</td>
+        <td class="categoryName">@i.CategoryName</td>
+        @if (@i.IsDeleted == true)
+        {
+            <td class="isDeleted">
+                <button class="btn btn-success btn-circle" title="YES"><span class="glyphicon glyphicon-ok"></span></button>
+            </td>
+        }
+        else
+        {
+            <td class="isDeleted">
+                <button class="btn btn-danger btn-circle" title="NO"><span class="glyphicon glyphicon-remove"></span></button>
+            </td>
+        }
+        <td>
+            @Ajax.ActionLink("Delete", "Delete", "CategoryCRUD", new { categoryId = @i.CategoryId }, new AjaxOptions
+       {
+           UpdateTargetId = "categoryTableBody"
+       })
+        </td>
+        <td class="edit" onclick="EditForm(this)" data-toggle="modal" data-target="#editModal"><a>Edit</a></td>
+    </tr>
+}
+

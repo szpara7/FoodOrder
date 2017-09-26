@@ -1,0 +1,154 @@
+﻿@model FoodOrder.ViewModel.CRUD.CategoryCRUDViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<div>
+    <h3>CATEGORY</h3>
+
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Category ID</th>
+                <th>Category name</th>
+                <th>Is deleted?</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+
+        <tbody id="categoryTableBody">
+            @Html.Action("GetAll", "CategoryCRUD")
+        </tbody>
+    </table>
+
+    <div class="btn-group">
+
+        @Ajax.ActionLink("Refresh", "GetAll", null, new AjaxOptions
+   {
+       UpdateTargetId = "categoryTableBody"
+   }, new { @class = "btn btn-primary" })
+
+
+        <input type="button" class="btn btn-danger" value="Add" data-toggle="modal" data-target="#addModal" id="addButton" />
+    </div>
+</div>
+
+<div class="modal fade" id="addModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><b>Add Category</b></h4>
+            </div>
+
+
+
+            @using (Ajax.BeginForm("Add", "CategoryCRUD", new AjaxOptions
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "categoryTableBody",
+                OnSuccess = "CreateSuccess"
+            }))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.Label("Category name:", new { @class = "control-label" })
+                        @Html.TextBoxFor(t => t.CategoryName, new { @class = "form-control", @required = "required", @id = "addCategoryName" })
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-danger" value="Add" />
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="editModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><b>Edit Category</b></h4>
+            </div>
+
+
+
+            @using (Ajax.BeginForm("Edit", "CategoryCRUD", new AjaxOptions
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "categoryTableBody",
+                OnSuccess = "EditSuccess"
+            }))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.Label("Category name:", new { @class = "control-label" })
+                        @Html.TextBoxFor(t => t.CategoryName, new { @class = "form-control", @required = "required", @id = "editCategoryName" })
+                    </div>
+
+                    @Html.HiddenFor(t => t.CategoryId, new { @id = "editCategoryId" })
+                    @Html.HiddenFor(t => t.IsDeleted, new { @id = "editIsDeleted"})
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-danger" value="Edit" />
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+<div id="asd"></div>
+
+
+<script>
+    function AddForm() {
+        $("#addButton").click(function () {
+            $("#addCategoryName").val("");
+        });
+    }
+
+    function CreateSuccess() {
+        $("#addModal").modal("toggle");
+    }
+
+    function EditSuccess() {
+        $("#editModal").modal("toggle");
+    }
+
+    function EditForm(e)
+    {
+            var target = $(e);
+ 
+            var categoryId = target.closest("tr").find(".categoryId").text();
+            $("#editCategoryId").val(categoryId);
+
+            var categoryName = target.closest("tr").find(".categoryName").text();
+            $("#editCategoryName").val(categoryName);
+        
+            if(target.closest("tr").find(".isDeleted").find("span").hasClass("glyphicon-ok")) {
+                $("#editIsDeleted").val(true);
+            }
+            else {
+                $("#editIsDeleted").val(false);
+            }
+    }
+
+    $(document).ready(function () {
+        AddForm();
+        EditForm();
+    });
+
+</script>

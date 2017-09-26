@@ -166,6 +166,8 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CRUD\CategoryCRUDController.cs" />
+    <Compile Include="Controllers\CRUD\CustomerCRUDController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -212,6 +214,7 @@
     <Compile Include="ViewModel\Auth\RegisterViewModel.cs" />
     <Compile Include="ViewModel\AccountManage\SetNewPasswordsViewModel.cs" />
     <Compile Include="ViewModel\Cart\CartViewModel.cs" />
+    <Compile Include="ViewModel\CRUD\CategoryCRUDViewModel.cs" />
     <Compile Include="ViewModel\Home\HomeIndexViewModel.cs" />
     <Compile Include="ViewModel\Home\MostOrdersViewModel.cs" />
     <Compile Include="ViewModel\Home\TopRatedViewModel.cs" />
@@ -250,6 +253,11 @@
     <Content Include="Views\Shared\NoPermission.cshtml" />
     <Content Include="Views\OrderManage\OrderDetails.cshtml" />
     <Content Include="Views\OrderManage\UserOrders.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\ManageCRUD.cshtml" />
+    <Content Include="Views\CategoryCRUD\Index.cshtml" />
+    <Content Include="Views\CustomerCRUD\Index.cshtml" />
+    <Content Include="Views\CategoryCRUD\GetAll.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -262,9 +270,7 @@
       <DependentUpon>201708091330123_add fields %27IsDeleted,...%27.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Admin\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

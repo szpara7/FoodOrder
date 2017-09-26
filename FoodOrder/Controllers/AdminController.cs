@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace FoodOrder.Controllers
 {
+    [RoutePrefix("admin")]
     public class AdminController : Controller
     {
         // GET: Admin
@@ -13,5 +14,14 @@ namespace FoodOrder.Controllers
         {
             return View();
         }
+
+        [Route("CRUD")]
+        public ActionResult ManageCRUD()
+        {
+
+            return View();
+        }
+
+
     }
 }

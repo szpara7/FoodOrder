@@ -27,7 +27,7 @@
                     </a>
                 </div>
                 <div class="col-lg-2" id="shoppingCart">
-                    @if (!Html.UserHasRole("Admin"))
+                    @if (!Html.UserHasRole("Admin", "Seller", "Cook"))
                     {
                         @Html.Action("ShowPartialCart", "Cart")
                     }

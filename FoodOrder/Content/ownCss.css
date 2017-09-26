@@ -1,7 +1,4 @@
-﻿body {
-
-}
-.row.content {
+﻿.row.content {
     height: 1500px;
 }
 
@@ -33,4 +30,14 @@
     -webkit-box-shadow: -1px -4px 48px 5px rgba(108,108,171,0.78);
 -moz-box-shadow: -1px -4px 48px 5px rgba(108,108,171,0.78);
 box-shadow: -1px -4px 48px 5px rgba(108,108,171,0.78);
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
 }
