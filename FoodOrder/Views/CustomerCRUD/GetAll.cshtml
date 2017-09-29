@@ -1,0 +1,18 @@
+﻿@model  IEnumerable<FoodOrder.ViewModel.CRUD.CustomerCRUDViewModel>
+
+@foreach (var i in Model)
+{
+    <tr>
+        <td>@i.CustomerID</td>
+        <td>@i.FirstName</td>
+        <td>@i.LastName</td>
+        <td>@i.EMail</td>
+        <td>
+            @Ajax.ActionLink("Details", "GetById", new { customerId = @i.CustomerID }, new AjaxOptions
+       {
+           OnSuccess = "Details",
+       })
+        </td>
+    </tr>
+}
+

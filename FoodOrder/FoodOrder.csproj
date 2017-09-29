@@ -215,6 +215,7 @@
     <Compile Include="ViewModel\AccountManage\SetNewPasswordsViewModel.cs" />
     <Compile Include="ViewModel\Cart\CartViewModel.cs" />
     <Compile Include="ViewModel\CRUD\CategoryCRUDViewModel.cs" />
+    <Compile Include="ViewModel\CRUD\CustomerCRUDViewModel.cs" />
     <Compile Include="ViewModel\Home\HomeIndexViewModel.cs" />
     <Compile Include="ViewModel\Home\MostOrdersViewModel.cs" />
     <Compile Include="ViewModel\Home\TopRatedViewModel.cs" />
@@ -258,6 +259,7 @@
     <Content Include="Views\CategoryCRUD\Index.cshtml" />
     <Content Include="Views\CustomerCRUD\Index.cshtml" />
     <Content Include="Views\CategoryCRUD\GetAll.cshtml" />
+    <Content Include="Views\CustomerCRUD\GetAll.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
