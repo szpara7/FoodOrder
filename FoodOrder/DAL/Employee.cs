@@ -55,7 +55,8 @@ namespace FoodOrder.DAL
     
     public enum Role
     {
-        Seller = 1,
+        None,
+        Seller,
         Cook,
         Driver,
         Admin

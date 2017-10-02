@@ -19,6 +19,13 @@
        },
         new { @class = "btn btn-primary" }
    )
+
+            @Ajax.ActionLink("Employee", "Index", "EmployeeCRUD", null, new AjaxOptions
+           {
+               UpdateTargetId = "bodyCRUD"
+           },
+        new { @class = "btn btn-primary" }
+   )
         </div>
     </div>
 

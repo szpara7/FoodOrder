@@ -1,0 +1,24 @@
+﻿@model IEnumerable<FoodOrder.ViewModel.CRUD.EmployeeCRUDViewModel>
+
+
+@foreach(var i in Model)
+{
+    <tr>
+        <td>@i.EmployeeID</td>
+        <td>@i.FirstName</td>
+        <td>@i.LastName</td>
+        <td>@i.Email</td>
+        <td>
+            @Ajax.ActionLink("Delete", "Delete", new { employeeId = @i.EmployeeID }, new AjaxOptions
+       {
+           UpdateTargetId = "employeeTableBody"
+       })
+        </td>
+        <td>
+            @Ajax.ActionLink("Details", "GetById", new { employeeId = @i.EmployeeID }, new AjaxOptions
+       {
+           OnSuccess = "Details"
+       })
+    </td>
+    </tr>
+}
