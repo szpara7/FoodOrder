@@ -42,5 +42,10 @@ namespace FoodOrder.Abstract
             context.SaveChanges();
             return true;
         }
+
+        public IEnumerable<Review> GetByProductId(int? productId)
+        {
+            return context.Reviews.Where(t => t.ProductId == productId).ToList();
+        }
     }
 }

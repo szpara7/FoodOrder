@@ -1,0 +1,25 @@
+﻿@model IEnumerable<FoodOrder.ViewModel.CRUD.ProductCRUDViewModel>
+@{ 
+    Layout = null;
+}
+@foreach(var i in Model)
+{
+    <tr>
+        <td class="productId">@i.ProductID</td>
+        <td>@i.ProductName</td>
+        <td>@i.Price</td>
+        <td>
+            @Ajax.ActionLink("Delete", "Delete", "ProductCRUD", new { productId = @i.ProductID }, new AjaxOptions
+       {
+            OnSuccess = "Delete"
+       })
+        </td>
+        <td>
+            @Ajax.ActionLink("Details", "GetById", "ProductCRUD", new { @productId = @i.ProductID }, new AjaxOptions
+       {
+           OnSuccess = "Details"
+       })
+        </td>
+        <td onclick="Edit(this)"><a>Edit</a></td>
+    </tr>
+}

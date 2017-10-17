@@ -1,0 +1,218 @@
+﻿@model FoodOrder.ViewModel.CRUD.ProductCRUDViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<div>
+    <h3>PRODUCTS</h3>
+
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Delete</th>
+                <th>Details</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+
+        <tbody id="productTableBody">
+            @Html.Action("GetAll", "ProductCRUD")
+        </tbody>
+    </table>
+
+    <div class="btn-group">
+
+        @Ajax.ActionLink("Refresh", "GetAll", null, new AjaxOptions
+   {
+       UpdateTargetId = "productTableBody"
+   }, new { @class = "btn btn-primary" })
+
+    </div>
+</div>
+
+<div class="modal fade" id="detailsModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><b>Details</b></h4>
+            </div>
+
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label col-lg-4" for="email">Product Id:</label>
+                    <div class="col-lg-8">
+                        <p class="form-control-static" id="detailProductId"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-lg-4" for="email">Product Name:</label>
+                    <div class="col-lg-8">
+                        <p class="form-control-static" id="detailProductName"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-lg-4" for="email">Price:</label>
+                    <div class="col-lg-8">
+                        <p class="form-control-static" id="detailPrice"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-lg-4" for="email">Rate:</label>
+                    <div class="col-lg-8">
+                        <p class="form-control-static" id="detailRate"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-lg-4" for="email">Descritpion:</label>
+                    <div class="col-lg-8">
+                        <p class="form-control-static" id="detailDescritpion"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-lg-4" for="email">Is Deleted?</label>
+                    <div class="col-lg-8">
+                        <p class="form-control-static" id="detailIsDeleted"></p>
+                    </div>
+                </div>
+
+
+                <div class="form-group" id="productDetailsReviews">
+                    <label class="control-label col-lg-12" for="email">Reviews</label>
+              
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><b>Edit</b></h4>
+            </div>
+
+            @using (Ajax.BeginForm("Edit", "ProductCRUD", new AjaxOptions
+            {
+                UpdateTargetId = "productTableBody",
+                OnComplete = "EditSuccess"
+            }, new { @class = "editBtn" }))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.Label("Product name:", new { @class = "control-label" })
+                        @Html.TextBoxFor(t => t.ProductName, new { @class = "form-control", @id = "editProductName", @required = "required" })
+
+                        @Html.Label("Description:", new { @class = "control-label" })
+                        @Html.TextAreaFor(t => t.Description, new { @class = "form-control", @id = "editDescription", @required = "required" })
+
+                        @Html.Label("Price:", new { @class = "control-label" })
+                        @Html.TextBoxFor(t => t.Price, new { @class = "form-control", @id = "editPrice", @required = "required" })
+
+                        @Html.HiddenFor(t => t.ImageName, new { @id = "editImageName" })
+                        @Html.HiddenFor(t => t.IsDeleted, new { @id = "editIsDeleted" })
+                        @Html.HiddenFor(t => t.ProductID, new { @id = "editProductId" })
+                        @Html.HiddenFor(t => t.Rate, new { @id = "editRate" })
+                        @Html.HiddenFor(t => t.PriceId, new { @id = "editPriceId" })
+                        @Html.HiddenFor(t => t.CategoryId, new { @id = "editCategoryId" })
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Edit" />
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+<div class="asd"></div>
+
+<script>
+
+    function Details(data) {
+        $("#detailProductId").text(data.ProductID);
+        $("#detailProductName").text(data.ProductName);
+        $("#detailPrice").text(data.Price);
+        $("#detailRate").text(data.Rate);
+        $("#detailDescritpion").text(data.Description);
+        $("#detailIsDeleted").text(data.IsDeleted);
+
+        if (data.IsDeleted) {
+            $("#detailIsDeleted").empty().append('<button class="btn btn-success btn-circle" title="YES"><span class="glyphicon glyphicon-ok"></span></button>');
+        }
+        else {
+            $("#detailIsDeleted").empty().append('<button class="btn btn-danger btn-circle" title="NO"><span class="glyphicon glyphicon-remove"></span></button>');
+        }
+
+        for (var i = 0; i < data.Reviews.length; i++) {
+            $("#productDetailsReviews").append('<div class="col-lg-12"><div class="col-lg-6"><p class="form-control-static">' + data.Reviews[i].Content + '</p></div>' +
+              '<div class="col-lg-6"><p class="form-control-static">' + data.Reviews[i].AdddedDate + '</p></div></div>');
+        }
+
+        jQuery.noConflict();
+        $("#detailsModal").modal("show");
+
+    }
+
+    function Delete() {
+        alert("Product was deleted!");
+    }
+
+    function Edit(e) {
+        $("#asd").append("EDIT");
+        var id = $(e).closest("tr").find(".productId").text();
+
+        $.ajax({
+            url: "/ProductCRUD/GetById?productId=" + id,
+            success: function (data) {
+
+                $("#editProductId").val(data.ProductID);
+                $("#editProductName").val(data.ProductName);
+                $("#editDescription").val(data.Description);
+                $("#editPrice").val(data.Price);
+                $("#editImageName").val(data.ImageName);
+                $("#editIsDeleted").val(data.IsDeleted);
+                $("#editRate").val(data.Rate);
+                $("#editPriceId").val(data.PriceId),
+                $("#editCategoryId").val(data.CategoryId);
+
+                jQuery.noConflict();
+                $("#editModal").modal("show");
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+    }
+
+    function EditSuccess() {
+        jQuery.noConflict();
+        $("#editModal").modal("toggle");
+    }
+
+</script>

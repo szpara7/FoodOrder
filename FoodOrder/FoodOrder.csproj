@@ -169,6 +169,7 @@
     <Compile Include="Controllers\CRUD\CategoryCRUDController.cs" />
     <Compile Include="Controllers\CRUD\CustomerCRUDController.cs" />
     <Compile Include="Controllers\CRUD\EmployeeCRUDController.cs" />
+    <Compile Include="Controllers\CRUD\ProductCRUDController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -218,6 +219,8 @@
     <Compile Include="ViewModel\CRUD\CategoryCRUDViewModel.cs" />
     <Compile Include="ViewModel\CRUD\CustomerCRUDViewModel.cs" />
     <Compile Include="ViewModel\CRUD\EmployeeCRUDViewModel.cs" />
+    <Compile Include="ViewModel\CRUD\ProductCRUDViewModel.cs" />
+    <Compile Include="ViewModel\CRUD\ReviewCRUDViewModel.cs" />
     <Compile Include="ViewModel\Home\HomeIndexViewModel.cs" />
     <Compile Include="ViewModel\Home\MostOrdersViewModel.cs" />
     <Compile Include="ViewModel\Home\TopRatedViewModel.cs" />
@@ -264,6 +267,8 @@
     <Content Include="Views\CustomerCRUD\GetAll.cshtml" />
     <Content Include="Views\EmployeeCRUD\Index.cshtml" />
     <Content Include="Views\EmployeeCRUD\GetAll.cshtml" />
+    <Content Include="Views\ProductCRUD\Index.cshtml" />
+    <Content Include="Views\ProductCRUD\GetAll.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

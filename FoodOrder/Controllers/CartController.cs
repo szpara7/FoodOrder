@@ -79,9 +79,9 @@ namespace FoodOrder.Controllers
         public ActionResult AddToCart(int productId)
         {
             Product product = productRepository.GetById(productId);
-            
+
             decimal price = priceRepository.GetAll()
-                .Where(t => t.Product.ProductID == productId)
+                .Where(t => t.Product.ProductID == productId && t.EndDate == null)
                 .Select(x => x.Value)
                 .FirstOrDefault();
 

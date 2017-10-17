@@ -9,5 +9,6 @@ namespace FoodOrder.Interfaces.Abstract
 {
     public interface IReviewRepository : IRepository<Review>
     {
+        IEnumerable<Review> GetByProductId(int? productId);
     }
 }

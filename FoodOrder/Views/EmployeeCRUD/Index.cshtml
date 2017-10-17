@@ -31,8 +31,6 @@
        UpdateTargetId = "employeeTableBody"
    }, new { @class = "btn btn-primary" })
 
-
-        <input type="button" class="btn btn-danger" value="Add" data-toggle="modal" data-target="#addModal" id="addButton" />
     </div>
 </div>
 
@@ -174,13 +172,11 @@
 
     </div>
 </div>
-<div id="asd"></div>
 
 <script>
 
     function Details(data)
     {
-        $("#asd").append("DETAILS");
         $("#detailEmployeeId").text(data.EmployeeID);
         $("#detailFirstName").text(data.FirstName);
         $("#detailLastName").text(data.LastName);

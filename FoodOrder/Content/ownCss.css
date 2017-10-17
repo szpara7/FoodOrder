@@ -1,4 +1,10 @@
-﻿.row.content {
+﻿.ownNavbar{
+    width : auto;
+    height : 100px;
+    background : url(../Images/navbar.PNG);
+}
+
+.row.content {
     height: 1500px;
 }
 
@@ -41,3 +47,4 @@ box-shadow: -1px -4px 48px 5px rgba(108,108,171,0.78);
   line-height: 1.428571429;
   border-radius: 15px;
 }
+
