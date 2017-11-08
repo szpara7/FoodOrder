@@ -2,14 +2,15 @@
 @{
     ViewBag.Title = "ManageCRUD";
 }
-
+<script src="~/Scripts/jquery-3.1.1.js"></script>
 <div class="col-lg-12 well well-lg">
     <div class="well well-lg">
         <div class="btn-group">
             @Ajax.ActionLink("Categories", "Index", "CategoryCRUD", null, new AjaxOptions
        {
            UpdateTargetId = "bodyCRUD",
-           LoadingElementId = "bodyLoading"
+           OnBegin = "LoadingBefore()",
+           OnComplete = "LoadingAfter()"
        },
         new { @class = "btn btn-primary" }
    )
@@ -17,7 +18,8 @@
             @Ajax.ActionLink("Customers", "Index", "CustomerCRUD", null, new AjaxOptions
        {
            UpdateTargetId = "bodyCRUD",
-           LoadingElementId = "bodyLoading"
+           OnBegin = "LoadingBefore()",
+           OnComplete = "LoadingAfter()"
        },
         new { @class = "btn btn-primary" }
    )
@@ -25,7 +27,8 @@
             @Ajax.ActionLink("Employee", "Index", "EmployeeCRUD", null, new AjaxOptions
        {
            UpdateTargetId = "bodyCRUD",
-           LoadingElementId = "bodyLoading"
+           OnBegin = "LoadingBefore()",
+           OnComplete = "LoadingAfter()"
        },
         new { @class = "btn btn-primary" }
    )
@@ -33,15 +36,31 @@
             @Ajax.ActionLink("Products", "Index", "ProductCRUD", null, new AjaxOptions
        {
            UpdateTargetId = "bodyCRUD",
-           LoadingElementId = "bodyLoading"
-       }, new { @class = "btn btn-primary"})
+           OnBegin = "LoadingBefore()",
+           OnComplete = "LoadingAfter()"
+       }, new { @class = "btn btn-primary" })
         </div>
     </div>
 
     <div id="bodyCRUD" class="well well-lg">
         @Html.Action("Index", "CategoryCRUD")
     </div>
-    <i id="bodyLoading" class="fa fa-spinner fa-pulse fa-3x fa-fw"  style="display:none; align-content:center"></i>
+    <i id="bodyLoading" class="fa fa-circle-o-notch fa-pulse fa-5x col-lg-offset-6" style="display:none; align-content:center" aria-hidden="true"></i>
 
 
 </div>
+
+<script>
+
+    function LoadingBefore() {
+        $("#bodyCRUD").hide();
+        $("#bodyLoading").show();
+    }
+
+    function LoadingAfter() {
+        $("#bodyCRUD").show();
+        $("#bodyLoading").hide();
+    }
+
+
+</script>
