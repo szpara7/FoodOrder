@@ -1,11 +1,61 @@
 ﻿@model FoodOrder.ViewModel.Cart.CartViewModel
 
+@*<div class="dropdown">
+        <button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown">
+            <span class="fa fa-shopping-cart"></span>
+            <span class="badge">@Model.TotalValue</span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <label></label>
+                <label>Product</label>
+                <label>Price</label>
+                <label>Quantity</label>
+            </li>
+            @foreach (var i in Model.CartLine)
+            {
+                <li>
+                    <div>
+                        <h4>
+
+                            @Ajax.ActionLink(" ", "RemoveFromCart", "Cart", new { productId = @i.ProductId }, new AjaxOptions
+                       {
+                           UpdateTargetId = "shoppingCart"
+                       }, new { @class = "fa fa-times",@title = "Delete" })
+
+                            <text>@i.ProductName</text>
+                            <text>@i.Price</text>
+                            <text>@i.Quantity</text>
+
+                        </h4>
+                    </div>
+                </li>
+            }
+            <text>@ViewBag.CartEmpty</text>
+            <li>
+                <a>
+                    @Html.ActionLink("Continue", "ShowCart", "Cart", new { @class = "btn btn-primary" })
+                </a>
+                <a>
+                    @Ajax.ActionLink("Clear", "ClearCart", "Cart", new { returnUrl = "ShowPartialCart" }, new AjaxOptions
+               {
+                   UpdateTargetId = "shoppingCart"
+               },
+               new { @class = "btn btn-danger" })
+                </a>
+            </li>
+        </ul>
+    </div>*@
+
 <div class="dropdown">
-    <button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown">
-        <span class="fa fa-shopping-cart"></span>
-        <span class="badge">@Model.TotalValue</span>
-        <span class="caret"></span>
-    </button>
+
+
+    <div class="fa fa-3x fa-shopping-cart cartIcon"></div>
+    <div class="cartBadge">@Model.TotalValue</div>
+    <div class="fa fa-caret-down fa-2x cartDown" data-toggle="dropdown"></div>
+
+
     <ul class="dropdown-menu">
         <li>
             <label></label>
@@ -14,15 +64,15 @@
             <label>Quantity</label>
         </li>
         @foreach (var i in Model.CartLine)
-        {
+            {
             <li>
                 <div>
                     <h4>
 
                         @Ajax.ActionLink(" ", "RemoveFromCart", "Cart", new { productId = @i.ProductId }, new AjaxOptions
-                   {
-                       UpdateTargetId = "shoppingCart"
-                   }, new { @class = "fa fa-times",@title = "Delete" })
+                       {
+                           UpdateTargetId = "shoppingCart"
+                       }, new { @class = "fa fa-times", @title = "Delete" })
 
                         <text>@i.ProductName</text>
                         <text>@i.Price</text>
@@ -39,10 +89,10 @@
             </a>
             <a>
                 @Ajax.ActionLink("Clear", "ClearCart", "Cart", new { returnUrl = "ShowPartialCart" }, new AjaxOptions
-           {
-               UpdateTargetId = "shoppingCart"
-           },
-           new { @class = "btn btn-danger" })
+               {
+                   UpdateTargetId = "shoppingCart"
+               },
+               new { @class = "btn btn-danger" })
             </a>
         </li>
     </ul>

@@ -4,38 +4,41 @@
     ViewBag.Title = "Index";
 }
 
-<div class="topRatedBlock">
-    <h2>Top Rated</h2>
+<div class="topRatedContent">
+    <h2 class="topRatedNavbar">Top Rated</h2>
+
+
+    @foreach (var i in Model.TopRated)
+    {
+        <div class="topRatedBox">
+            <a class="col-lg-pull-1"><img src="@Url.ProductImagePath(@i.CategoryName,@i.ImageName)" height="185" width="275" align="left" /></a>
+            <h2 align="center">@i.ProductName</h2>
+            <h3>Rate: @i.Rate</h3>
+            <a href="@Url.Action("ProductDetails","Product",new { productId = @i.ProductID})">
+                <input type="submit" class="btn btn-default btn-lg" value="Show details" />
+            </a>
+            @Ajax.ActionLink("Add to cart", "AddtoCart", "Cart", new { productId = @i.ProductID }, new AjaxOptions
+       {
+           UpdateTargetId = "shoppingCart"
+       }, new { @class = "top-right btn btn-danger btn-lg" })
+        </div>
+    }
 </div>
 
-@foreach (var i in Model.TopRated)
-{
-    <div class="col-lg-4 well">
-        <a class="col-lg-pull-1"><img src="@Url.ProductImagePath(@i.CategoryName,@i.ImageName)" height="185" width="275" align="left" /></a>
-        <h2 align="center">@i.ProductName</h2>
-        <h3>Rate: @i.Rate</h3>
-        <a href="@Url.Action("ProductDetails","Product",new { productId = @i.ProductID})">
-            <input type="submit" class="btn btn-default btn-lg" value="Show details" />
-        </a>
-        @Ajax.ActionLink("Add to cart", "AddtoCart", "Cart", new { productId = @i.ProductID }, new AjaxOptions
+<div class="topRatedContent">
+    <h2 class="topRatedNavbar">Most Orders</h2>
+    @foreach (var i in Model.MostOrders)
     {
-        UpdateTargetId = "shoppingCart"
-    }, new { @class = "top-right btn btn-danger btn-lg" })
-    </div>
-}
-<br />
-<h2>Most Orders</h2>
-@foreach (var i in Model.MostOrders)
-{
-    <div class="col-lg-4 well">
-        <a class="col-lg-pull-1"><img src="@Url.ProductImagePath(@i.CategoryName,@i.ImageName)" height="185" width="275" align="left" /></a>
-        <h2>@i.ProductName</h2>
-        <a href="@Url.Action("ProductDetails","Product",new { productId = @i.ProductID})">
-            <input type="submit" class="btn btn-default btn-lg" value="Show details" />
-        </a>
-        @Ajax.ActionLink("Add to cart", "AddtoCart", "Cart", new { productId = @i.ProductID }, new AjaxOptions
-     {
-         UpdateTargetId = "shoppingCart"
-     }, new { @class = "top-right btn btn-danger btn-lg" })
-    </div>
-}
+        <div class="topRatedBox">
+            <a class="col-lg-pull-1"><img src="@Url.ProductImagePath(@i.CategoryName,@i.ImageName)" height="185" width="275" align="left" /></a>
+            <h2>@i.ProductName</h2>
+            <a href="@Url.Action("ProductDetails","Product",new { productId = @i.ProductID})">
+                <input type="submit" class="btn btn-default btn-lg" value="Show details" />
+            </a>
+            @Ajax.ActionLink("Add to cart", "AddtoCart", "Cart", new { productId = @i.ProductID }, new AjaxOptions
+       {
+           UpdateTargetId = "shoppingCart"
+       }, new { @class = "top-right btn btn-danger btn-lg" })
+        </div>
+    }
+</div>

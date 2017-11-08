@@ -2,14 +2,18 @@
 
 @if (!Html.UserIsLogged())
 {
-    <div class="well well-sm">
-        <a href="@Url.Action("Login","Auth")">
-            <input type="submit" class="btn btn-primary" value="Log in" />
-        </a>
+    <div class="LogReg">
+        <div>
+            <a class="logBtn" style="text-decoration:none" href="@Url.Action("Login","Auth")">
+                Login
+            </a>
+        </div>
 
-        <a href="@Url.Action("Register","Auth")">
-            <input type="submit" class="btn btn-primary" value="Register" />
-        </a>
+        <div>
+            <a class="regBtn" style="text-decoration:none" href="@Url.Action("Register","Auth")">
+               Register
+            </a>
+        </div>
     </div>
 }
 else

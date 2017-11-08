@@ -1,50 +1,252 @@
-﻿.ownNavbar{
-    width : auto;
-    height : 100px;
-    background : url(../Images/navbar.PNG);
+﻿
+body {
+    background-image: url(../Images/vertical-waves.png);
+    padding: 5px;
+    font-family: "Indie Flower";
 }
 
-.row.content {
-    height: 1500px;
+
+.ownContainer {
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
+
+
+@media (min-width: 768px) {
+    .ownContainer {
+        width: 98%;
+    }
+}
+
+@media (min-width: 992px) {
+    .ownContainer {
+        width: 98%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .ownContainer {
+        width: 98%;
+    }
+}
+
+
+.ownNavbar {
+    background-color: orange;
+    width: auto;
+    height: 100px;
+    margin-left: -30px;
+    margin-right: -30px;
+}
+
+.navbarBrand {
+    border-right: 3px groove darkorange;
+}
+
+.logo {
+    padding: 5px;
+    color: black;
+    font-family: 'Nosifer';
+    font-size: xx-large;
+    text-align: left;
+    letter-spacing: 2px;
+}
+
+.content {
+    margin-top: 15px;
+    margin-left: -30px;
+    margin-right: -30px;
+}
+
+.categories {
+    text-align: center;
+    background-color: rgb(255,240,53);
+    height: 750px;
+}
+
+.categoriesList {
+    text-align: left;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.categoryBtn {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 4px;
+    width: 100%;
+    cursor: pointer;
+}
+
+
+/*.row.content {
+    height: 1500px;
+}*/
 
 .sidenav {
-    background-color:#E0E0E0;
-    border-color:#606060;
+    background-color: #E0E0E0;
+    border-color: #606060;
     height: 100%;
 }
 
 .tlo {
-    background-color:#ffff55;
-    border-bottom-color:#ffff55;
+    background-color: #ffff55;
+    border-bottom-color: #ffff55;
     height: 55px;
-    color:red;
+    color: red;
 }
 
-.categoriesButton{
-    height:60px;
-    width:200px;
+.categoriesButton {
+    height: 60px;
+    width: 200px;
 }
 
-.topRatedBlock{
-    height:auto;
-    width:200px;
-    background-color:aliceblue;
+.topRatedContent {
+    height : 500px;
+    width: 100%;
+    margin-top : 0px;
+    margin-bottom : -20px;
 }
 
-.boxPrice{
+.topRatedNavbar
+{
+    height : 70px;
+    width : 100%;
+    background-color : rgb(255,240,53);
+    padding : 20px;
+    text-align : center;
+    font-size : 30px;
+    font-weight : bold;
+    margin-bottom : 10px;
+    margin-top : 0px;
+}
+
+.topRatedBox
+{
+    height : 380px;
+    width : 31%;
+    background-color : #e0e0d2;
+    float : left;
+    margin :0 1% 0 1%;
+    padding : 5px;
+    border : 4px solid #d5d5c3;
+}
+
+.boxPrice {
     -webkit-box-shadow: -1px -4px 48px 5px rgba(108,108,171,0.78);
--moz-box-shadow: -1px -4px 48px 5px rgba(108,108,171,0.78);
-box-shadow: -1px -4px 48px 5px rgba(108,108,171,0.78);
+    -moz-box-shadow: -1px -4px 48px 5px rgba(108,108,171,0.78);
+    box-shadow: -1px -4px 48px 5px rgba(108,108,171,0.78);
 }
 
 .btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+
+.shoppingCart {
+    background-color: white;
+    height: 90px;
+    margin-top: 5px;
+    margin-bottom: -5px;
+    padding: 20px 10px 20px 10px;
+    text-align: left;
+    border-radius: 10px;
+    letter-spacing: 5px;
+    float: left;
+    border : 1px solid black;
+}
+
+.cartIcon {
+    float: left;
+    width: 30%;
+    margin-right: 5%;
+}
+
+.cartBadge {
+    float: left;
+    height: 50px;
+    width: 45%;
+    padding: 10px 0px 10px 0px;
+    background-color: #86708f;
+    border-radius: 10px;
+    text-align: center;
+    font-size : 20px;
+    font-weight : bold;
+}
+
+.cartDown {
+    float: left;
+    width: 20%;
+    text-align: right;
+    padding-top: 35px;
+}
+
+.cartDropdown
+{
+    width : 200px;
+    background-color : black;
+}
+
+.dropdown-menu {
+    width: 300px !important;
+    top : 70px;
+    padding : 10px !important;
+}
+
+.LogReg {
+    background-color: orange;
+    height: 90px;
+    margin-top: 5px;
+    margin-bottom: -5px;
+    margin-right: -10px;
+    text-align: left;
+    border-radius: 10px;
+    letter-spacing: 5px;
+}
+
+.logBtn {
+    width: 100%;
+    display: inline-block;
+    height: 45px;
+    text-align: center;
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+    background-color: white;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border : 1px solid black;
+}
+
+.regBtn {
+    width: 100%;
+    display: inline-block;
+    height: 42px;
+    border-radius: 10px;
+    text-align: center;
+    color: black;
+    background-color: white;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border : 1px solid black;
+    
 }
 

@@ -132,9 +132,12 @@
     <Content Include="Images\Category\PIZZA\hawajska.jpg" />
     <Content Include="Images\Category\PIZZA\margarita.jpg" />
     <Content Include="Images\Category\PIZZA\wloska.jpg" />
+    <Content Include="Images\logo — kopia.png" />
     <Content Include="Images\logo.png" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Images\navbar.PNG" />
     <Content Include="Images\noPermission.jpg" />
+    <Content Include="Images\vertical-waves.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />

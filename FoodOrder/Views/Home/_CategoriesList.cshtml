@@ -1,12 +1,12 @@
 ﻿@model List<FoodOrder.DAL.Category>
 
 
-<div class="btn-group-vertical btn-block">
+<div class="categoriesList">
     @foreach (var i in Model)
     {
-        <a href="@Url.Action("ProductsList","Product", new { categoryName = i.CategoryName})">
-            <input type="submit" class="btn btn-default btn-block" value="@i.CategoryName" />
-        </a>
+        <div><a class="categoryBtn" style="text-decoration:none" href="@Url.Action("ProductsList","Product", new { categoryName = i.CategoryName})">
+            @i.CategoryName
+        </a></div>
     }
 </div>
 
